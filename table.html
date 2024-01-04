@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+    
+
+        #circularcursor {
+            background-color: transparent;
+            border: 1px solid black;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            position: absolute;
+            z-index: 1;
+            transition: 0.2s;
+        }
+
+        body {
+            width: 80%;
+            margin: auto;
+            background-color: rgb(228, 233, 235);
+        }
+
+        tbody {
+            font-size: 95%;
+            font-style: normal;
+        }
+
+        tfoot {
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 2px solid rgb(200, 200, 200);
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        td,
+        th {
+            border: 1px solid darkgrey;
+            padding: 10px 20px;
+            background-color: white;
+        }
+
+        th {
+            background-color: rgb(154, 151, 151);
+        }
+
+        td {
+            text-align: center;
+        }
+
+
+        caption {
+            padding: 10px;
+        }
+
+        .theader th {
+            background-color: rgb(8, 6, 16);
+            color: white;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        #minimize-gross-btn,
+        #minimize-regime-btn,
+        #minimize-investment-btn {
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            margin-top: 20px;
+            margin-right: 5px;
+            background-color: black;
+            color: white;
+        }
+
+        #container td:nth-child(odd) {
+            text-align: left;
+        }
+
+        #regime-container td:nth-child(1) {
+            text-align: right;
+        }
+
+        #investment-container td:nth-child(1) {
+            text-align: right;
+        }
+
+        td {
+            position: relative;
+            transition: 0.5s;
+        }
+
+        td:hover {
+            background-color: rgb(112, 110, 110);
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="circularcursor"></div>
+    <div class="container" id="container">
+        <table>
+            <tr class="theader">
+                <th>General</th>
+                <th colspan="2">Monthly Salary Details 2023-2024</th>
+                <th>DELHI</th>
+            </tr>
+            <div id="gross-container">
+                <tr>
+                    <td id="test">Basic Salary + DA</td>
+                    <td id="e2">0</td>
+                    <td>Children Education Allowance</td>
+                    <td id="h2">0</td>
+                </tr>
+                <tr>
+                    <td>House Rent Allowance - HRA</td>
+                    <td id="e3">0</td>
+                    <td>Children Hostel Allowance</td>
+                    <td id="h3">0</td>
+                </tr>
+                <tr>
+                    <td>Medical Allowance</td>
+                    <td id="e4">0</td>
+                    <td>Washing Allowance</td>
+                    <td id="h4">0</td>
+                </tr>
+                <tr>
+                    <td>Conveyance Allowance</td>
+                    <td id="e5">0</td>
+                    <td>Uniform Allowance</td>
+                    <td id="h5">0</td>
+                </tr>
+                <tr>
+                    <td>Special Allowance</td>
+                    <td id="e6">0</td>
+                    <td>Sum of All Other Reimbursements</td>
+                    <td id="h6">0</td>
+                </tr>
+                <tr>
+                    <td>Other Allowance</td>
+                    <td id="e7">0</td>
+                    <td>Sum of All Other Allowances</td>
+                    <td id="h7">0</td>
+                </tr>
+                <tr>
+                    <td>Leave Travel Allowance - LTA</td>
+                    <td id="e8">0</td>
+                    <td>Sum of All Annual Perks (If Any)</td>
+                    <td id="h8"></td>
+                </tr>
+                <tr>
+                    <td>Meal (Voucher) Allowance</td>
+                    <td id="e9">0</td>
+                    <td>Monthly House Rent Paid</td>
+                    <td id="h9">0</td>
+                </tr>
+                <tr>
+                    <td>NPS Employer Contribution</td>
+                    <td id="e10">0</td>
+                    <td>Select Rent Location</td>
+                    <td id="h10">Metro City</td>
+                </tr>
+                <tr>
+                    <th colspan="2">Total Monthly Gross Salary:</th>
+                    <th colspan="2" id="totalMonthlyGrossSalary"></th>
+                </tr>
+            </div>
+        </table>
+        <div>
+            <button id="minimize-gross-btn">-</button>
+        </div>
+    </div>
+    <br>
+    <div id="regime-container" class="container">
+        <table>
+            <tr>
+                <th style="width:50%" colspan="2">Taxability and Calculation as per Old and New Regime</th>
+                <th>Old Regime</th>
+                <th>New Regime</th>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Gross Annual Salary Income (Salary + Allowances + Perks):</td>
+                <td id="f14"></td>
+                <td id="h14"></td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Less: Tax On Employment (Professional Tax):</td>
+                <td id="f15"></td>
+                <td id="h15"></td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Less: Tax On Employment (Professional Tax):</td>
+                <td id="f16">0</td>
+                <td id="h16">0</td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Less: Standard Deduction:</td>
+                <td id="f17"></td>
+                <td id="h17"></td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Auto Calculation as Per Rent Amount ----- Less: HRA Exemption</td>
+                <td id="f18">0</td>
+                <td id="h18">0</td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Amount of LTA Travel Bills (Annually) ----- Less: LTA Exemption</td>
+                <td id="f19"></td>
+                <td id="h19">0</td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Income from Salary:</td>
+                <td id="f20"></td>
+                <td id="h20"></td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Less: Loss from House Property u/s(24)</td>
+                <td id="f21">0</td>
+                <td id="h21">0</td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Add: Income from House Property</td>
+                <td id="f22">0</td>
+                <td id="h22"></td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Add: Income from Other Sources</td>
+                <td id="f23">0</td>
+                <td id="h23"></td>
+            </tr>
+            <tr>
+                <th style="width:50%" colspan="2">Gross Total Income:</th>
+                <th id="f24"></th>
+                <th id="h24"></th>
+            </tr>
+        </table>
+        <div>
+            <button id="minimize-regime-btn">-</button>
+        </div>
+    </div>
+
+    <br>
+    <div id="investment-container" class="container">
+        <table class="investments">
+            <tr>
+                <th style="width:50%" colspan="2">Investments U/S 80C & 80CCC</th>
+                <th style="width:50%" colspan="2"></th>
+            </tr>
+            <tr>
+                <td>Current Employer - PF</td>
+                <td id="e26">0</td>
+                <td colspan="2" rowspan="14"></td>
+            </tr>
+            <tr>
+                <td>Previous Employer - PF</td>
+                <td id="e27">0</td>
+                <!-- <td colspan="2"></td> -->
+            </tr>
+            <tr>
+                <td>Voluntary Provident Fund - VPF</td>
+                <td id="e28">0</td>
+                <!-- <td colspan="2"></td> -->
+            </tr>
+            <tr>
+                <td>Life Insurance Premiums - LIP</td>
+                <td id="e29">0</td>
+            </tr>
+            <tr>
+                <td>Public Provident Fund - PPF</td>
+                <td id="e30">0</td>
+            </tr>
+            <tr>
+                <td>Children Education Tuition Fees - CEF</td>
+                <td id="e31">0</td>
+            </tr>
+            <tr>
+                <td>Pension Funds - Section 80CCC</td>
+                <td id="e32">0</td>
+            </tr>
+            <tr>
+                <td>Bank Fixed Deposits (5-Yr) -FD</td>
+                <td id="e33">0</td>
+            </tr>
+            <tr>
+                <td>Unit Linked Insurance Plan - ULIP</td>
+                <td id="e34">0</td>
+            </tr>
+            <tr>
+                <td>Home Loan Principal Repayment - HLP</td>
+                <td id="e35">0</td>
+            </tr>
+            <tr>
+                <td>Equity Linked Savings Scheme - ELSS</td>
+                <td id="e36">0</td>
+            </tr>
+            <tr>
+                <td>National Savings Certificate - NSC</td>
+                <td id="e37">0</td>
+            </tr>
+            <tr>
+                <td>Stamp Duty and Registration Charges</td>
+                <td id="e38">0</td>
+            </tr>
+            <tr>
+                <td>Other Investments e.g. Sukanya Account</td>
+                <td id="e39">0</td>
+            </tr>
+            <tr>
+                <th>Total Investments U/S 80C & 80CCC</th>
+                <th id="e40"></th>
+                <th id="f40"></th>
+                <th>0</th>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80D</td>
+                <td id="f41">0</td>
+                <td id="h41">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80CCD(1B)</td>
+                <td id="f42">0</td>
+                <td id="h42">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80CCD2</td>
+                <td id="f43">0</td>
+                <td id="h43">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80DD</td>
+                <td id="f44">0</td>
+                <td id="h44">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80DDB</td>
+                <td id="f45">0</td>
+                <td id="h45">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80E</td>
+                <td id="f46">0</td>
+                <td id="h46">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80EE</td>
+                <td id="f47">0</td>
+                <td id="h47">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80EEA</td>
+                <td id="f48">0</td>
+                <td id="h48">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80G</td>
+                <td id="f49">0</td>
+                <td id="h49">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80TTA</td>
+                <td id="f50">0</td>
+                <td id="h50">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Deduction u/s 80U</td>
+                <td id="f51">0</td>
+                <td id="h51">0</td>
+            </tr>
+            <tr>
+                <th colspan="2">Total Deduction U/C VIA</th>
+                <th id="f52">0</th>
+                <th id="h52">0</th>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th colspan="2">Taxable Income</th>
+                <th id="f54">0</th>
+                <th id="h54">0</th>
+            </tr>
+            <tr>
+                <td colspan="2">Income Tax</td>
+                <td id="f55">0</td>
+                <td id="h55">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Less: Rebate 87A</td>
+                <td id="f56">0</td>
+                <td id="h56">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Balance Tax Liability</td>
+                <td id="f57">0</td>
+                <td id="h57">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Add: Surcharge</td>
+                <td id="f58">0</td>
+                <td id="h58">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Total Tax</td>
+                <td id="f59">0</td>
+                <td id="h59">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Add: Edu, Health Cess</td>
+                <td id="f60">0</td>
+                <td id="h60">0</td>
+            </tr>
+            <tr class="theader">
+                <th colspan="2">Net Annual Tax</th>
+                <th id="f61">0</th>
+                <th id="h61">0</th>
+            </tr>
+
+        </table>
+        <div>
+            <button id="minimize-investment-btn">-</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const e2 = document.getElementById('e2')
+    const e3 = document.getElementById('e3')
+    const e4 = document.getElementById('e4')
+    const e5 = document.getElementById('e5')
+    const e6 = document.getElementById('e6')
+    const e7 = document.getElementById('e7')
+    const e8 = document.getElementById('e8')
+    const e9 = document.getElementById('e9')
+    const e10 = document.getElementById('e10')
+    const h2 = document.getElementById('h2')
+    const h3 = document.getElementById('h3')
+    const h4 = document.getElementById('h4')
+    const h5 = document.getElementById('h5')
+    const h6 = document.getElementById('h6')
+    const h7 = document.getElementById('h7')
+    const h8 = document.getElementById('h8')
+    const h9 = document.getElementById('h9')
+    const f14 = document.getElementById('f14')
+    const f15 = document.getElementById('f15')
+    const f16 = document.getElementById('f16')
+    const f17 = document.getElementById('f17')
+    const f18 = document.getElementById('f18')
+    const f19 = document.getElementById('f19')
+    const f20 = document.getElementById('f20')
+    const f21 = document.getElementById('f21')
+    const f22 = document.getElementById('f22')
+    const f23 = document.getElementById('f23')
+    const f24 = document.getElementById('f24')
+    const h14 = document.getElementById('h14')
+    const h15 = document.getElementById('h15')
+    const h16 = document.getElementById('h16')
+    const h17 = document.getElementById('h17')
+    const h18 = document.getElementById('h18')
+    const h19 = document.getElementById('h19')
+    const h20 = document.getElementById('h20')
+    const h21 = document.getElementById('h21')
+    const h22 = document.getElementById('h22')
+    const h23 = document.getElementById('h23')
+    const h24 = document.getElementById('h24')
+    const e26 = document.getElementById('e26')
+    const e27 = document.getElementById('e27')
+    const e28 = document.getElementById('e28')
+    const e29 = document.getElementById('e29')
+    const e30 = document.getElementById('e30')
+    const e31 = document.getElementById('e31')
+    const e32 = document.getElementById('e32')
+    const e33 = document.getElementById('e33')
+    const e34 = document.getElementById('e34')
+    const e35 = document.getElementById('e35')
+    const e36 = document.getElementById('e36')
+    const e37 = document.getElementById('e37')
+    const e38 = document.getElementById('e38')
+    const e39 = document.getElementById('e39')
+    const e40 = document.getElementById('e40')
+    const f40 = document.getElementById('f40')
+    const f41 = document.getElementById('f41')
+    const f42 = document.getElementById('f42')
+    const f43 = document.getElementById('f43')
+    const f44 = document.getElementById('f44')
+    const f45 = document.getElementById('f45')
+    const f46 = document.getElementById('f46')
+    const f47 = document.getElementById('f47')
+    const f48 = document.getElementById('f48')
+    const f49 = document.getElementById('f49')
+    const f50 = document.getElementById('f50')
+    const f51 = document.getElementById('f51')
+    const f52 = document.getElementById('f52')
+    const f54 = document.getElementById('f54')
+    const f55 = document.getElementById('f55')
+    const f56 = document.getElementById('f56')
+    const f57 = document.getElementById('f57')
+    const f58 = document.getElementById('f58')
+    const f59 = document.getElementById('f59')
+    const f60 = document.getElementById('f60')
+    const f61 = document.getElementById('f61')
+    const h40 = document.getElementById('h40')
+    const h41 = document.getElementById('h41')
+    const h42 = document.getElementById('h42')
+    const h43 = document.getElementById('h43')
+    const h44 = document.getElementById('h44')
+    const h45 = document.getElementById('h45')
+    const h46 = document.getElementById('h46')
+    const h47 = document.getElementById('h47')
+    const h48 = document.getElementById('h48')
+    const h49 = document.getElementById('h49')
+    const h50 = document.getElementById('h50')
+    const h51 = document.getElementById('h51')
+    const h52 = document.getElementById('h52')
+    const h54 = document.getElementById('h54')
+    const h55 = document.getElementById('h55')
+    const h56 = document.getElementById('h56')
+    const h57 = document.getElementById('h57')
+    const h58 = document.getElementById('h58')
+    const h59 = document.getElementById('h59')
+    const h60 = document.getElementById('h60')
+    const h61 = document.getElementById('h61')
+    const h62 = document.getElementById('h62')
+
+
+    h8.innerText = Math.max((e10.innerText + e26.innerText) - 75000, 0)
+
+    const totalMonthlyGrossSalary = document.getElementById('totalMonthlyGrossSalary')
+
+    totalMonthlyGrossSalary.innerText = +e2.innerText + +e3.innerText + +e4.innerText + +e5.innerText + +e6.innerText + +e6.innerText + +e7.innerText + +e8.innerText + +e9.innerText + +e10.innerText + +h2.innerText + +h3.innerText + +h4.innerText + +h5.innerText + +h6.innerText + +h7.innerText
+
+    f14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
+    f15.innerText = (+e9.innerText + Math.min(+h2.innerText, 200) + Math.min(+h3.innerText, 600) + +h4.innerText + +h5.innerText + +h6.innerText) * 12
+    f17.innerText = Math.max(Math.min(f14.innerText, 50000), 0)
+    f19.innerText = Math.min(+e8.innerText * 12, 150000)
+    f20.innerText = +f14.innerText - +f15.innerText - +f16.innerText - +f17.innerText - +f18.innerText - +f19.innerText
+    f24.innerText = +f20.innerText + +f21.innerText + +f22.innerText + +f23.innerText
+
+    h14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
+    h15.innerText = +h6.innerText * 12
+    h17.innerText = Math.max(Math.min(h14.innerText, 50000), 0)
+    h20.innerText = +h14.innerText - +h15.innerText - +h17.innerText
+    h22.innerText = +f22.innerText
+    h23.innerText = +f23.innerText
+    h24.innerText = +h20.innerText + +h22.innerText + +h23.innerText
+
+    e40.innerText = +e26.innerText + +e27.innerText + +e28.innerText + +e29.innerText + +e30.innerText + +e31.innerText + +e32.innerText + +e33.innerText + +e34.innerText + +e35.innerText + +e36.innerText + +e37.innerText + +e38.innerText + +e39.innerText
+    f40.innerText = Math.min(+e40.innerText, 150000)
+    f43.innerText = Math.min((+e2.innerText * 12) * 0.1, (+e10.innerText * 12))
+    //f52
+    f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
+
+    h52.innerText = +h41.innerText + +h42.innerText + +h43.innerText + +h44.innerText + +h45.innerText + +h46.innerText + +h47.innerText + +h48.innerText + +h49.innerText + +h50.innerText + +h51.innerText
+    h54.innerText = Math.max((+h24.innerText - +h52.innerText), 0)
+    h57.innerText = +h55.innerText - +h56.innerText
+    h59.innerText = +h57.innerText + +h57.innerText
+
+
+    const grossContainer = document.getElementById('gross-container')
+    const grossBtn = document.getElementById('minimize-gross-btn')
+    const regimeBtn = document.getElementById('minimize-regime-btn')
+    const investmentBtn = document.getElementById('minimize-investment-btn')
+    const test = document.getElementById('test')
+
+    const block = document.getElementById('container')
+    const regimeContainer = document.getElementById('regime-container')
+    const investmentContainer = document.getElementById('investment-container')
+
+    grossBtn.addEventListener('click', () => {
+        const tds = block.querySelectorAll('td')
+        if (grossBtn.innerText == '-') {
+            for (let i = 0; i < tds.length; i++) {
+                tds[i].style.display = 'none'
+                grossBtn.innerText = '+'
+            }
+        } else {
+            for (let i = 0; i < tds.length; i++) {
+                tds[i].style.display = ''
+                grossBtn.innerText = '-'
+            }
+        }
+
+    })
+
+    regimeBtn.addEventListener('click', () => {
+        const tds = regimeContainer.querySelectorAll('td')
+        if (regimeBtn.innerText == '-') {
+            for (let i = 0; i < tds.length; i++) {
+                tds[i].style.display = 'none'
+                regimeBtn.innerText = '+'
+            }
+        } else {
+            for (let i = 0; i < tds.length; i++) {
+                tds[i].style.display = ''
+                regimeBtn.innerText = '-'
+            }
+        }
+
+    })
+
+    investmentBtn.addEventListener('click', () => {
+        const tds = investmentContainer.querySelectorAll('td')
+        if (investmentBtn.innerText == '-') {
+            for (let i = 0; i < tds.length; i++) {
+                tds[i].style.display = 'none'
+                investmentBtn.innerText = '+'
+            }
+        } else {
+            for (let i = 0; i < tds.length; i++) {
+                tds[i].style.display = ''
+                investmentBtn.innerText = '-'
+            }
+        }
+
+    })
+
+    $(document).ready(function () {
+        $(document).on('mousemove', function (e) {
+            $('#circularcursor').css({
+                left: e.pageX,
+                top: e.pageY
+            });
+        })
+    });
+
+
+</script>
