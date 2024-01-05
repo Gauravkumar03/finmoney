@@ -44,7 +44,8 @@
             margin-top: 20px;
         }
 
-        #container th, td {
+        #container th,
+        td {
             width: 25%;
         }
 
@@ -124,6 +125,18 @@
             color: white;
 
         }
+
+        .deduction-flex {
+            width: 50%;
+        }
+
+        #expandable-btn {
+            cursor: pointer;
+        }
+
+        /* .expandable {
+            background-color: azure;
+        } */
     </style>
 </head>
 
@@ -215,20 +228,53 @@
                 <td id="h14"></td>
             </tr>
             <tr>
-                <td style="width:50%" colspan="2">Less: Tax On Employment (Professional Tax):</td>
+                <td style="width:50%" colspan="2">Less: Standard Deduction:</td>
+                <td id="f17"></td>
+                <td id="h17"></td>
+            </tr>
+            <tr>
+                <td class="deduction-flex" colspan="2">
+                    Less: Sec10 Exemption &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <button
+                        id="expandable-btn">-</button>
+                </td>
                 <td id="f15"></td>
                 <td id="h15"></td>
             </tr>
+
+            <div id="expandable-container">
+                <tr>
+                    <td class="expandable" style="width:50%" colspan="2">Other Allowance:</td>
+                    <td class="expandable" id="f17a"></td>
+                    <td class="expandable" id="h17a"></td>
+                </tr>
+                <tr>
+                    <td class="expandable" style="width:50%" colspan="2">HRA:</td>
+                    <td class="expandable" id="f17b"></td>
+                    <td class="expandable" id="h17b"></td>
+                </tr>
+                <tr>
+                    <td class="expandable" style="width:50%" colspan="2">Travelling Allowance:</td>
+                    <td class="expandable" id="f17c"></td>
+                    <td class="expandable" id="h17c"></td>
+                </tr>
+                <tr>
+                    <td class="expandable" style="width:50%" colspan="2">Gratuity:</td>
+                    <td class="expandable" id="f17d"></td>
+                    <td class="expandable" id="h17d"></td>
+                </tr>
+                <tr>
+                    <td class="expandable" style="width:50%" colspan="2">Leave Encashment:</td>
+                    <td class="expandable" id="f17e"></td>
+                    <td class="expandable" id="h17e"></td>
+                </tr>
+            </div>
+
             <tr>
                 <td style="width:50%" colspan="2">Less: Tax On Employment (Professional Tax):</td>
                 <td id="f16">0</td>
                 <td id="h16">0</td>
             </tr>
-            <tr>
-                <td style="width:50%" colspan="2">Less: Standard Deduction:</td>
-                <td id="f17"></td>
-                <td id="h17"></td>
-            </tr>
+
             <tr>
                 <td style="width:50%" colspan="2">Auto Calculation as Per Rent Amount ----- Less: HRA Exemption</td>
                 <td id="f18">0</td>
@@ -253,6 +299,21 @@
                 <td style="width:50%" colspan="2">Add: Income from House Property</td>
                 <td id="f22">0</td>
                 <td id="h22"></td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Add: Income from Business/Professional Income</td>
+                <td id="f22a"></td>
+                <td id="h22a"></td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Add: Income from Capital Gain</td>
+                <td id="f22b"></td>
+                <td id="h22b"></td>
+            </tr>
+            <tr>
+                <td style="width:50%" colspan="2">Add: Income from Dividends</td>
+                <td id="f22c"></td>
+                <td id="h22c"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Add: Income from Other Sources</td>
@@ -347,7 +408,7 @@
             <button id="minimize-investment-btn">-</button>
         </div>
     </div>
-    
+
     <div class="container">
         <table id="deductions-container">
             <tr>
@@ -415,7 +476,7 @@
             <button id="minimize-deduction-btn">-</button>
         </div>
     </div>
-    
+
     <div class="container">
         <table id="income-container">
             <tr>
@@ -469,6 +530,21 @@
 </html>
 
 <script>
+
+    const jsonData = localStorage.getItem('jsonData')
+    const data = JSON.parse(jsonData)
+
+    let dividendVal
+    if (data.ITR.ITR2 != undefined) {
+        dividendVal = data.ITR.ITR2.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
+    } else if (data.ITR.ITR3 != undefined) {
+        dividendVal = data.ITR.ITR3.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
+    } else if (data.ITR.ITR4 != undefined) {
+        dividendVal = data.ITR.ITR4.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
+    }
+
+
+
     const e2 = document.getElementById('e2')
     const e3 = document.getElementById('e3')
     const e4 = document.getElementById('e4')
@@ -495,6 +571,7 @@
     const f20 = document.getElementById('f20')
     const f21 = document.getElementById('f21')
     const f22 = document.getElementById('f22')
+    const f22c = document.getElementById('f22c')
     const f23 = document.getElementById('f23')
     const f24 = document.getElementById('f24')
     const h14 = document.getElementById('h14')
@@ -506,6 +583,7 @@
     const h20 = document.getElementById('h20')
     const h21 = document.getElementById('h21')
     const h22 = document.getElementById('h22')
+    const h22c = document.getElementById('h22c')
     const h23 = document.getElementById('h23')
     const h24 = document.getElementById('h24')
     const e26 = document.getElementById('e26')
@@ -580,12 +658,14 @@
     f19.innerText = Math.min(+e8.innerText * 12, 150000)
     f20.innerText = +f14.innerText - +f15.innerText - +f16.innerText - +f17.innerText - +f18.innerText - +f19.innerText
     f24.innerText = +f20.innerText + +f21.innerText + +f22.innerText + +f23.innerText
+    f22c.innerText = dividendVal
 
     h14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
     h15.innerText = +h6.innerText * 12
     h17.innerText = Math.max(Math.min(h14.innerText, 50000), 0)
     h20.innerText = +h14.innerText - +h15.innerText - +h17.innerText
     h22.innerText = +f22.innerText
+    h22c.innerText = dividendVal
     h23.innerText = +f23.innerText
     h24.innerText = +h20.innerText + +h22.innerText + +h23.innerText
 
@@ -607,6 +687,7 @@
     const investmentBtn = document.getElementById('minimize-investment-btn')
     const incomeBtn = document.getElementById('minimize-income-btn')
     const deductiontBtn = document.getElementById('minimize-deduction-btn')
+    const expandableBtn = document.getElementById('expandable-btn')
     const test = document.getElementById('test')
 
     const block = document.getElementById('container')
@@ -614,6 +695,25 @@
     const investmentContainer = document.getElementById('investments-container')
     const incomeContainer = document.getElementById('income-container')
     const deductionContainer = document.getElementById('deductions-container')
+    const expandableContainer = document.getElementById('expandable-container')
+
+    expandableBtn.addEventListener('click', () => {
+
+        const tds = document.getElementsByClassName('expandable')
+        if (expandableBtn.innerText == '-') {
+            for (let i = 0; i < tds.length; i++) {
+                tds[i].style.display = 'none'
+                expandableBtn.innerText = '+'
+            }
+        } else {
+            for (let i = 0; i < tds.length; i++) {
+                tds[i].style.display = ''
+                expandableBtn.innerText = '-'
+            }
+        }
+
+    })
+
 
     grossBtn.addEventListener('click', () => {
         const tds = block.querySelectorAll('td')
