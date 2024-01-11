@@ -201,7 +201,7 @@
             text-align: center;
         }
 
-        table th{
+        table th {
             text-align: center;
         }
     </style>
@@ -623,8 +623,8 @@
             </tr>
             <tr class="theader">
                 <th colspan="2">Net Annual Tax</th>
-                <th id="f61">0</th>
-                <th id="h61">0</th>
+                <th id="f61"></th>
+                <th id="h61"></th>
             </tr>
         </table>
         <div>
@@ -772,7 +772,7 @@
     totalMonthlyGrossSalary.innerText = mainVal
 
 
-    window.addEventListener('click', function() {
+    window.addEventListener('click', function () {
         totalMonthlyGrossSalary.innerText = +e2.childNodes[0].value + +e3.childNodes[0].value + +e4.childNodes[0].value + +e5.childNodes[0].value + +e6.childNodes[0].value + +e7.childNodes[0].value + +e8.childNodes[0].value + +e9.childNodes[0].value + +e10.childNodes[0].value + +h2.childNodes[0].value + +h3.childNodes[0].value + +h4.childNodes[0].value + +h5.childNodes[0].value + +h6.childNodes[0].value + +h7.childNodes[0].value
 
         h8.innerHTML = `<input type='text' value='${Math.max((e10.childNodes[0].value + e26.childNodes[0].value) - 75000, 0)}'>`
@@ -834,13 +834,16 @@
         h57.innerHTML = `<input type='text' value='${+h55.childNodes[0].value - +h56.childNodes[0].value}'>`
 
         h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value - +h57.childNodes[0].value}'>`
+
+        f61.innerText = +f59.childNodes[0].value + +f60.childNodes[0].value
+        h61.innerText = +h59.childNodes[0].value + +h60.childNodes[0].value
     })
 
     // f14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
     f14.innerHTML = `<input type='text' value='${(totalMonthlyGrossSalary.innerText * 12) + +h8.innerText}'>`
     // f15.innerText = (+e9.innerText + Math.min(+h2.innerText, 200) + Math.min(+h3.innerText, 600) + +h4.innerText + +h5.innerText + +h6.innerText) * 12
     f15val = (+e9.childNodes[0].value + Math.min(+h2.childNodes[0].value, 200) + Math.min(+h3.childNodes[0].value, 600) + +h4.childNodes[0].value + +h5.childNodes[0].value + +h6.childNodes[0].value) * 12
-    f15.innerHTML = `<input type='text' value='${f15val}'>` 
+    f15.innerHTML = `<input type='text' value='${f15val}'>`
 
     // f17.innerText = Math.max(Math.min(f14.innerText, 50000), 0)
     // f17.innerHTML = `<input type='text' value='${Math.max(Math.min(+f14.childNodes[0].value, 50000), 0)}'`
@@ -903,9 +906,9 @@
     //f52
     f52.innerText = +f40.innerText + Math.min(+f41.childNodes[0].value, 75000) + Math.min(+f42.childNodes[0].value, 50000) + +f43.childNodes[0].value + Math.min(+f44.childNodes[0].value, 125000) + Math.min(+f45.childNodes[0].value, 125000) + +f46.childNodes[0].value + Math.min(+f47.childNodes[0].value, 50000) + Math.min(+f48.childNodes[0].value, 150000) + +f49.childNodes[0].value + Math.min(+f50.childNodes[0].value, 10000) + Math.min(+f51.childNodes[0].value, 125000)
 
-    
 
-    
+
+
 
     // f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
     f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
@@ -923,6 +926,9 @@
 
     // h59.innerText = +h57.innerText + +h57.innerText
     h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value - +h57.childNodes[0].value}'>`
+
+    f61.innerText = +f59.childNodes[0].value + +f60.childNodes[0].value
+    h61.innerText = +h59.childNodes[0].value + +h60.childNodes[0].value
 
 
 
@@ -1050,7 +1056,7 @@
     });
 
     const alltds = document.querySelectorAll('td')
-    
+
 
     // for(let i = 0; i < alltds.length; i++) {
     //     alltds[i].addEventListener('click', () => {
