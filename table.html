@@ -178,11 +178,11 @@
             transition: 0.5s;
         }
 
-        td:hover {
+        /* td:hover {
             background-color: rgb(112, 110, 110);
             color: white;
 
-        }
+        } */
 
         .deduction-flex {
             width: 50%;
@@ -195,6 +195,15 @@
         /* .expandable {
             background-color: azure;
         } */
+
+        input {
+            border: 1px solid white;
+            text-align: center;
+        }
+
+        table th{
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -250,55 +259,55 @@
             <div id="gross-container">
                 <tr>
                     <td id="test">Basic Salary + DA</td>
-                    <td id="e2">0</td>
+                    <td id="e2"><input type="text" value="0"></td>
                     <td>Children Education Allowance</td>
-                    <td id="h2">0</td>
+                    <td id="h2"><input type="text" value="0"></td>
                 </tr>
                 <tr>
                     <td>House Rent Allowance - HRA</td>
-                    <td id="e3">0</td>
+                    <td id="e3"><input type="text" value="0"></td>
                     <td>Children Hostel Allowance</td>
-                    <td id="h3">0</td>
+                    <td id="h3"><input type="text" value="0"></td>
                 </tr>
                 <tr>
                     <td>Medical Allowance</td>
-                    <td id="e4">0</td>
+                    <td id="e4"><input type="text" value="0"></td>
                     <td>Washing Allowance</td>
-                    <td id="h4">0</td>
+                    <td id="h4"><input type="text" value="0"></td>
                 </tr>
                 <tr>
                     <td>Conveyance Allowance</td>
-                    <td id="e5">0</td>
+                    <td id="e5"><input type="text" value="0"></td>
                     <td>Uniform Allowance</td>
-                    <td id="h5">0</td>
+                    <td id="h5"><input type="text" value="0"></td>
                 </tr>
                 <tr>
                     <td>Special Allowance</td>
-                    <td id="e6">0</td>
+                    <td id="e6"><input type="text" value="0"></td>
                     <td>Sum of All Other Reimbursements</td>
-                    <td id="h6">0</td>
+                    <td id="h6"><input type="text" value="0"></td>
                 </tr>
                 <tr>
                     <td>Other Allowance</td>
-                    <td id="e7">0</td>
+                    <td id="e7"><input type="text" value="0"></td>
                     <td>Sum of All Other Allowances</td>
-                    <td id="h7">0</td>
+                    <td id="h7"><input type="text" value="0"></td>
                 </tr>
                 <tr>
                     <td>Leave Travel Allowance - LTA</td>
-                    <td id="e8">0</td>
+                    <td id="e8"><input type="text" value="0"></td>
                     <td>Sum of All Annual Perks (If Any)</td>
-                    <td id="h8"></td>
+                    <td id="h8"><input type="text" value="0"></td>
                 </tr>
                 <tr>
                     <td>Meal (Voucher) Allowance</td>
-                    <td id="e9">0</td>
+                    <td id="e9"><input type="text" value="0"></td>
                     <td>Monthly House Rent Paid</td>
-                    <td id="h9">0</td>
+                    <td id="h9"><input type="text" value="0"></td>
                 </tr>
                 <tr>
                     <td>NPS Employer Contribution</td>
-                    <td id="e10">0</td>
+                    <td id="e10"><input type="text" value="9"></td>
                     <td>Select Rent Location</td>
                     <td id="h10">Metro City</td>
                 </tr>
@@ -322,100 +331,100 @@
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Gross Annual Salary Income (Salary + Allowances + Perks):</td>
-                <td id="f14"></td>
-                <td id="h14"></td>
+                <td id="f14"><input type="text"></td>
+                <td id="h14"><input type="text"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Less: Standard Deduction:</td>
-                <td id="f17"></td>
-                <td id="h17"></td>
+                <td id="f17"><input type="text"></td>
+                <td id="h17"><input type="text"></td>
             </tr>
             <tr>
                 <td class="deduction-flex" colspan="2">
                     Less: Sec10 Exemption &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <button
                         id="expandable-btn">-</button>
                 </td>
-                <td id="f15"></td>
-                <td id="h15"></td>
+                <td id="f15"><input type="text"></td>
+                <td id="h15"><input type="text"></td>
             </tr>
 
             <div id="expandable-container">
                 <tr>
                     <td class="expandable" style="width:50%" colspan="2">Other Allowance:</td>
-                    <td class="expandable" id="f17a"></td>
-                    <td class="expandable" id="h17a"></td>
+                    <td class="expandable" id="f17a"><input type="text"></td>
+                    <td class="expandable" id="h17a"><input type="text"></td>
                 </tr>
                 <tr>
                     <td class="expandable" style="width:50%" colspan="2">HRA:</td>
-                    <td class="expandable" id="f17b"></td>
-                    <td class="expandable" id="h17b"></td>
+                    <td class="expandable" id="f17b"><input type="text" value="2"></td>
+                    <td class="expandable" id="h17b"><input type="text" value="2"></td>
                 </tr>
                 <tr>
                     <td class="expandable" style="width:50%" colspan="2">Travelling Allowance:</td>
-                    <td class="expandable" id="f17c"></td>
-                    <td class="expandable" id="h17c"></td>
+                    <td class="expandable" id="f17c"><input type="text"></td>
+                    <td class="expandable" id="h17c"><input type="text"></td>
                 </tr>
                 <tr>
                     <td class="expandable" style="width:50%" colspan="2">Gratuity:</td>
-                    <td class="expandable" id="f17d"></td>
-                    <td class="expandable" id="h17d"></td>
+                    <td class="expandable" id="f17d"><input type="text"></td>
+                    <td class="expandable" id="h17d"><input type="text"></td>
                 </tr>
                 <tr>
                     <td class="expandable" style="width:50%" colspan="2">Leave Encashment:</td>
-                    <td class="expandable" id="f17e"></td>
-                    <td class="expandable" id="h17e"></td>
+                    <td class="expandable" id="f17e"><input type="text"></td>
+                    <td class="expandable" id="h17e"><input type="text"></td>
                 </tr>
             </div>
 
             <tr>
                 <td style="width:50%" colspan="2">Less: Tax On Employment (Professional Tax):</td>
-                <td id="f16">0</td>
-                <td id="h16">0</td>
+                <td id="f16"><input type="text"></td>
+                <td id="h16"><input type="text"></td>
             </tr>
 
             <tr>
                 <td style="width:50%" colspan="2">Auto Calculation as Per Rent Amount ----- Less: HRA Exemption</td>
-                <td id="f18">0</td>
-                <td id="h18">0</td>
+                <td id="f18"><input type="text"></td>
+                <td id="h18"><input type="text"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Amount of LTA Travel Bills (Annually) ----- Less: LTA Exemption</td>
-                <td id="f19"></td>
-                <td id="h19">0</td>
+                <td id="f19"><input type="text"></td>
+                <td id="h19"><input type="text"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Income from Salary:</td>
-                <td id="f20"></td>
-                <td id="h20"></td>
+                <td id="f20"><input type="text"></td>
+                <td id="h20"><input type="text"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Less: Loss from House Property u/s(24)</td>
-                <td id="f21">0</td>
-                <td id="h21">0</td>
+                <td id="f21"><input type="text"></td>
+                <td id="h21"><input type="text"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Add: Income from House Property</td>
-                <td id="f22">0</td>
-                <td id="h22"></td>
+                <td id="f22"><input type="text"></td>
+                <td id="h22"><input type="text"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Add: Income from Business/Professional Income</td>
-                <td id="f22a"></td>
-                <td id="h22a"></td>
+                <td id="f22a"><input type="text"></td>
+                <td id="h22a"><input type="text"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Add: Income from Capital Gain</td>
-                <td id="f22b"></td>
-                <td id="h22b"></td>
+                <td id="f22b"><input type="text"></td>
+                <td id="h22b"><input type="text"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Add: Income from Dividends</td>
-                <td id="f22c"></td>
-                <td id="h22c"></td>
+                <td id="f22c"><input type="text"></td>
+                <td id="h22c"><input type="text"></td>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Add: Income from Other Sources</td>
-                <td id="f23">0</td>
+                <td id="f23"><input type="text" value="0"></td>
                 <td id="h23"></td>
             </tr>
             <tr>
@@ -438,68 +447,68 @@
             </tr>
             <tr>
                 <td>Current Employer - PF</td>
-                <td id="e26">0</td>
-                <td colspan="2" rowspan="14"></td>
+                <td id="e26"><input type="text"></td>
+                <td colspan="2" rowspan="14"><input type="text"></td>
             </tr>
             <tr>
                 <td>Previous Employer - PF</td>
-                <td id="e27">0</td>
+                <td id="e27"><input type="text"></td>
                 <!-- <td colspan="2"></td> -->
             </tr>
             <tr>
                 <td>Voluntary Provident Fund - VPF</td>
-                <td id="e28">0</td>
+                <td id="e28"><input type="text"></td>
                 <!-- <td colspan="2"></td> -->
             </tr>
             <tr>
                 <td>Life Insurance Premiums - LIP</td>
-                <td id="e29">0</td>
+                <td id="e29"><input type="text"></td>
             </tr>
             <tr>
                 <td>Public Provident Fund - PPF</td>
-                <td id="e30">0</td>
+                <td id="e30"><input type="text"></td>
             </tr>
             <tr>
                 <td>Children Education Tuition Fees - CEF</td>
-                <td id="e31">0</td>
+                <td id="e31"><input type="text"></td>
             </tr>
             <tr>
                 <td>Pension Funds - Section 80CCC</td>
-                <td id="e32">0</td>
+                <td id="e32"><input type="text"></td>
             </tr>
             <tr>
                 <td>Bank Fixed Deposits (5-Yr) -FD</td>
-                <td id="e33">0</td>
+                <td id="e33"><input type="text"></td>
             </tr>
             <tr>
                 <td>Unit Linked Insurance Plan - ULIP</td>
-                <td id="e34">0</td>
+                <td id="e34"><input type="text"></td>
             </tr>
             <tr>
                 <td>Home Loan Principal Repayment - HLP</td>
-                <td id="e35">0</td>
+                <td id="e35"><input type="text"></td>
             </tr>
             <tr>
                 <td>Equity Linked Savings Scheme - ELSS</td>
-                <td id="e36">0</td>
+                <td id="e36"><input type="text"></td>
             </tr>
             <tr>
                 <td>National Savings Certificate - NSC</td>
-                <td id="e37">0</td>
+                <td id="e37"><input type="text"></td>
             </tr>
             <tr>
                 <td>Stamp Duty and Registration Charges</td>
-                <td id="e38">0</td>
+                <td id="e38"><input type="text"></td>
             </tr>
             <tr>
                 <td>Other Investments e.g. Sukanya Account</td>
-                <td id="e39">0</td>
+                <td id="e39"><input type="text"></td>
             </tr>
             <tr>
                 <th>Total Investments U/S 80C & 80CCC</th>
                 <th id="e40"></th>
                 <th id="f40"></th>
-                <th>0</th>
+                <th></th>
             </tr>
         </table>
         <div>
@@ -511,63 +520,63 @@
         <table id="deductions-container">
             <tr>
                 <td colspan="2">Deduction u/s 80D</td>
-                <td id="f41">0</td>
-                <td id="h41">0</td>
+                <td id="f41"><input type="text"></td>
+                <td id="h41"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80CCD(1B)</td>
-                <td id="f42">0</td>
-                <td id="h42">0</td>
+                <td id="f42"><input type="text"></td>
+                <td id="h42"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80CCD2</td>
-                <td id="f43">0</td>
-                <td id="h43">0</td>
+                <td id="f43"><input type="text"></td>
+                <td id="h43"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80DD</td>
-                <td id="f44">0</td>
-                <td id="h44">0</td>
+                <td id="f44"><input type="text"></td>
+                <td id="h44"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80DDB</td>
-                <td id="f45">0</td>
-                <td id="h45">0</td>
+                <td id="f45"><input type="text"></td>
+                <td id="h45"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80E</td>
-                <td id="f46">0</td>
-                <td id="h46">0</td>
+                <td id="f46"><input type="text"></td>
+                <td id="h46"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80EE</td>
-                <td id="f47">0</td>
-                <td id="h47">0</td>
+                <td id="f47"><input type="text"></td>
+                <td id="h47"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80EEA</td>
-                <td id="f48">0</td>
-                <td id="h48">0</td>
+                <td id="f48"><input type="text"></td>
+                <td id="h48"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80G</td>
-                <td id="f49">0</td>
-                <td id="h49">0</td>
+                <td id="f49"><input type="text"></td>
+                <td id="h49"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80TTA</td>
-                <td id="f50">0</td>
-                <td id="h50">0</td>
+                <td id="f50"><input type="text"></td>
+                <td id="h50"><input type="text"></td>
             </tr>
             <tr>
                 <td colspan="2">Deduction u/s 80U</td>
-                <td id="f51">0</td>
-                <td id="h51">0</td>
+                <td id="f51"><input type="text"></td>
+                <td id="h51"><input type="text"></td>
             </tr>
             <tr>
                 <th colspan="2">Total Deduction U/C VIA</th>
-                <th id="f52">0</th>
-                <th id="h52">0</th>
+                <th id="f52"></th>
+                <th id="h52"></th>
             </tr>
         </table>
         <div>
@@ -584,33 +593,33 @@
             </tr>
             <tr>
                 <td colspan="2">Income Tax</td>
-                <td id="f55">0</td>
-                <td id="h55">0</td>
+                <td id="f55"><input type="text" value="0"></td>
+                <td id="h55"><input type="text" value="0"></td>
             </tr>
             <tr>
                 <td colspan="2">Less: Rebate 87A</td>
-                <td id="f56">0</td>
-                <td id="h56">0</td>
+                <td id="f56"><input type="text" value="0"></td>
+                <td id="h56"><input type="text" value="0"></td>
             </tr>
             <tr>
                 <td colspan="2">Balance Tax Liability</td>
-                <td id="f57">0</td>
-                <td id="h57">0</td>
+                <td id="f57"><input type="text" value="0"></td>
+                <td id="h57"><input type="text" value="0"></td>
             </tr>
             <tr>
                 <td colspan="2">Add: Surcharge</td>
-                <td id="f58">0</td>
-                <td id="h58">0</td>
+                <td id="f58"><input type="text" value="0"></td>
+                <td id="h58"><input type="text" value="0"></td>
             </tr>
             <tr>
                 <td colspan="2">Total Tax</td>
-                <td id="f59">0</td>
-                <td id="h59">0</td>
+                <td id="f59"><input type="text" value="0"></td>
+                <td id="h59"><input type="text" value="0"></td>
             </tr>
             <tr>
                 <td colspan="2">Add: Edu, Health Cess</td>
-                <td id="f60">0</td>
-                <td id="h60">0</td>
+                <td id="f60"><input type="text" value="0"></td>
+                <td id="h60"><input type="text" value="0"></td>
             </tr>
             <tr class="theader">
                 <th colspan="2">Net Annual Tax</th>
@@ -633,13 +642,18 @@
     const data = JSON.parse(jsonData)
 
     let dividendVal
-    if (data.ITR.ITR2 != undefined) {
-        dividendVal = data.ITR.ITR2.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
-    } else if (data.ITR.ITR3 != undefined) {
-        dividendVal = data.ITR.ITR3.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
-    } else if (data.ITR.ITR4 != undefined) {
-        dividendVal = data.ITR.ITR4.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
+    if (data) {
+        if (data.ITR.ITR2 != undefined) {
+            dividendVal = data.ITR.ITR2.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
+        } else if (data.ITR.ITR3 != undefined) {
+            dividendVal = data.ITR.ITR3.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
+        } else if (data.ITR.ITR4 != undefined) {
+            dividendVal = data.ITR.ITR4.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
+        }
+    } else {
+        dividendVal = 0
     }
+
 
 
 
@@ -744,39 +758,146 @@
     const h62 = document.getElementById('h62')
 
 
-    h8.innerText = Math.max((e10.innerText + e26.innerText) - 75000, 0)
+    // h8.innerText = Math.max((e10.innerText + e26.innerText) - 75000, 0)
+    h8val = Math.max((e10.childNodes[0].value + e26.childNodes[0].value) - 75000, 0)
+    h8.innerHTML = `<input type='text' value='${h8val}'>`
 
     const totalMonthlyGrossSalary = document.getElementById('totalMonthlyGrossSalary')
 
-    totalMonthlyGrossSalary.innerText = +e2.innerText + +e3.innerText + +e4.innerText + +e5.innerText + +e6.innerText + +e6.innerText + +e7.innerText + +e8.innerText + +e9.innerText + +e10.innerText + +h2.innerText + +h3.innerText + +h4.innerText + +h5.innerText + +h6.innerText + +h7.innerText
+    // totalMonthlyGrossSalary.innerText = +e2.innerText + +e3.innerText + +e4.innerText + +e5.innerText + +e6.innerText + +e6.innerText + +e7.innerText + +e8.innerText + +e9.innerText + +e10.innerText + +h2.innerText + +h3.innerText + +h4.innerText + +h5.innerText + +h6.innerText + +h7.innerText
 
-    f14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
-    f15.innerText = (+e9.innerText + Math.min(+h2.innerText, 200) + Math.min(+h3.innerText, 600) + +h4.innerText + +h5.innerText + +h6.innerText) * 12
-    f17.innerText = Math.max(Math.min(f14.innerText, 50000), 0)
-    f19.innerText = Math.min(+e8.innerText * 12, 150000)
-    f20.innerText = +f14.innerText - +f15.innerText - +f16.innerText - +f17.innerText - +f18.innerText - +f19.innerText
-    f24.innerText = +f20.innerText + +f21.innerText + +f22.innerText + +f23.innerText
-    f22c.innerText = dividendVal
 
-    h14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
-    h15.innerText = +h6.innerText * 12
-    h17.innerText = Math.max(Math.min(h14.innerText, 50000), 0)
-    h20.innerText = +h14.innerText - +h15.innerText - +h17.innerText
-    h22.innerText = +f22.innerText
-    h22c.innerText = dividendVal
-    h23.innerText = +f23.innerText
-    h24.innerText = +h20.innerText + +h22.innerText + +h23.innerText
+    const mainVal = +e2.childNodes[0].value + +e3.childNodes[0].value + +e4.childNodes[0].value + +e5.childNodes[0].value + +e6.childNodes[0].value + +e7.childNodes[0].value + +e8.childNodes[0].value + +e9.childNodes[0].value + +e10.childNodes[0].value + +h2.childNodes[0].value + +h3.childNodes[0].value + +h4.childNodes[0].value + +h5.childNodes[0].value + +h6.childNodes[0].value + +h7.childNodes[0].value
 
-    e40.innerText = +e26.innerText + +e27.innerText + +e28.innerText + +e29.innerText + +e30.innerText + +e31.innerText + +e32.innerText + +e33.innerText + +e34.innerText + +e35.innerText + +e36.innerText + +e37.innerText + +e38.innerText + +e39.innerText
-    f40.innerText = Math.min(+e40.innerText, 150000)
-    f43.innerText = Math.min((+e2.innerText * 12) * 0.1, (+e10.innerText * 12))
+    totalMonthlyGrossSalary.innerText = mainVal
+
+
+    window.addEventListener('click', function() {
+        totalMonthlyGrossSalary.innerText = +e2.childNodes[0].value + +e3.childNodes[0].value + +e4.childNodes[0].value + +e5.childNodes[0].value + +e6.childNodes[0].value + +e7.childNodes[0].value + +e8.childNodes[0].value + +e9.childNodes[0].value + +e10.childNodes[0].value + +h2.childNodes[0].value + +h3.childNodes[0].value + +h4.childNodes[0].value + +h5.childNodes[0].value + +h6.childNodes[0].value + +h7.childNodes[0].value
+
+        h8.innerHTML = `<input type='text' value='${Math.max((e10.childNodes[0].value + e26.childNodes[0].value) - 75000, 0)}'>`
+
+        f14.innerHTML = `<input type='text' value='${(totalMonthlyGrossSalary.innerText * 12) + +h8.innerText}'>`
+
+        f15.innerHTML = `<input type='text' value='${(+e9.childNodes[0].value + Math.min(+h2.childNodes[0].value, 200) + Math.min(+h3.childNodes[0].value, 600) + +h4.childNodes[0].value + +h5.childNodes[0].value + +h6.childNodes[0].value) * 12}'>`
+
+        f19.innerHTML = `<input type='text' value='${f19val}'>`
+
+        f20.innerHTML = `<input type='text' value='${+f14.childNodes[0].value - +f15.childNodes[0].value - +f16.childNodes[0].value - +f17.childNodes[0].value - +f18.childNodes[0].value - +f19.childNodes[0].value}'>`
+
+        f24.innerText = +f20.childNodes[0].value + +f21.childNodes[0].value + +f22.childNodes[0].value
+
+        f22c.innerHTML = `<input type='text' value='${dividendVal}'>`
+
+        h14.innerHTML = `<input type='text' value='${totalMonthlyGrossSalary.innerText * 12 + +h8.childNodes[0].value}'>`
+
+        h15.innerHTML = `<input type='text' value='${+h6.childNodes[0].value * 12}'>`
+
+        h17.innerHTML = `<input type='text' value='${Math.max(Math.min(+h14.childNodes[0].value, 50000), 0)}'>`
+
+        h20.innerHTML = `<input type='text' value='${+h14.childNodes[0].value - +h15.childNodes[0].value - +h17.childNodes[0].value}'>`
+
+        h22.innerHTML = `<input type='text' value='${+f22.childNodes[0].value}'>`
+
+        h22c.innerHTML = `<input type='text' value='${dividendVal}'>`
+
+        h14.innerHTML = `<input type='text' value='${totalMonthlyGrossSalary.innerText * 12 + +h8.childNodes[0].value}'>`
+
+        h15.innerHTML = `<input type='text' value='${+h6.childNodes[0].value * 12}'>`
+
+        h17.innerHTML = `<input type='text' value='${Math.max(Math.min(+h14.childNodes[0].value, 50000), 0)}'>`
+
+        h20.innerHTML = `<input type='text' value='${+h14.childNodes[0].value - +h15.childNodes[0].value - +h17.childNodes[0].value}'>`
+
+        h22.innerHTML = `<input type='text' value='${+f22.childNodes[0].value}'>`
+
+        h22c.innerHTML = `<input type='text' value='${dividendVal}'>`
+
+        h23.innerHTML = `<input type='text' value='${+f23.childNodes[0].value}'>`
+    })
+
+    // f14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
+    f14.innerHTML = `<input type='text' value='${(totalMonthlyGrossSalary.innerText * 12) + +h8.innerText}'>`
+    // f15.innerText = (+e9.innerText + Math.min(+h2.innerText, 200) + Math.min(+h3.innerText, 600) + +h4.innerText + +h5.innerText + +h6.innerText) * 12
+    f15val = (+e9.childNodes[0].value + Math.min(+h2.childNodes[0].value, 200) + Math.min(+h3.childNodes[0].value, 600) + +h4.childNodes[0].value + +h5.childNodes[0].value + +h6.childNodes[0].value) * 12
+    f15.innerHTML = `<input type='text' value='${f15val}'>` 
+
+    // f17.innerText = Math.max(Math.min(f14.innerText, 50000), 0)
+    // f17.innerHTML = `<input type='text' value='${Math.max(Math.min(+f14.childNodes[0].value, 50000), 0)}'`
+
+    // f19.innerText = Math.min(+e8.innerText * 12, 150000)
+    const f19val = Math.max(Math.min(+f14.childNodes[0].value, 50000), 0)
+    f19.innerHTML = `<input type='text' value='${f19val}'>`
+
+    // f20.innerText = +f14.innerText - +f15.innerText - +f16.innerText - +f17.innerText - +f18.innerText - +f19.innerText
+    f20.innerHTML = `<input type='text' value='${+f14.childNodes[0].value - +f15.childNodes[0].value - +f16.childNodes[0].value - +f17.childNodes[0].value - +f18.childNodes[0].value - +f19.childNodes[0].value}'>`
+
+
+    // f24.innerText = +f20.innerText + +f21.innerText + +f22.innerText + +f23.innerText
+    // f24.innerHTML = `<input type='text' value='${+f20.childNodes[0].value + +f21.childNodes[0].value + +f22.childNodes[0].value + +f23.childNodes[0].value}'>`
+    f24.innerText = +f20.childNodes[0].value + +f21.childNodes[0].value + +f22.childNodes[0].value
+
+    // f22c.innerText = dividendVal
+    f22c.innerHTML = `<input type='text' value='${dividendVal}'>`
+
+    // h14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
+    h14.innerHTML = `<input type='text' value='${totalMonthlyGrossSalary.innerText * 12 + +h8.childNodes[0].value}'>`
+
+    // h15.innerText = +h6.innerText * 12
+    h15.innerHTML = `<input type='text' value='${+h6.childNodes[0].value * 12}'>`
+
+    // h17.innerText = Math.max(Math.min(h14.innerText, 50000), 0)
+    h17.innerHTML = `<input type='text' value='${Math.max(Math.min(+h14.childNodes[0].value, 50000), 0)}'>`
+    // console.log(h17.childNodes[0].value)
+
+    // h20.innerText = +h14.innerText - +h15.innerText - +h17.innerText
+    h20.innerHTML = `<input type='text' value='${+h14.childNodes[0].value - +h15.childNodes[0].value - +h17.childNodes[0].value}'>`
+
+    // h22.innerText = +f22.innerText
+    h22.innerHTML = `<input type='text' value='${+f22.childNodes[0].value}'>`
+
+
+    // h22c.innerText = dividendVal
+    h22c.innerHTML = `<input type='text' value='${dividendVal}'>`
+
+
+    // h23.innerText = +f23.innerText
+    h23.innerHTML = `<input type='text' value='${+f23.childNodes[0].value}'>`
+
+
+    // h24.innerText = +h20.innerText + +h22.innerText + +h23.innerText
+    // h24.innerHTML = `<input type='text' value='${+h20.childNodes[0].value + +h22.childNodes[0].value + +h23.childNodes[0].value}'>`
+    h24.innerText = +h20.childNodes[0].value + +h22.childNodes[0].value + +h23.childNodes[0].value
+
+    // e40.innerText = +e26.innerText + +e27.innerText + +e28.innerText + +e29.innerText + +e30.innerText + +e31.innerText + +e32.innerText + +e33.innerText + +e34.innerText + +e35.innerText + +e36.innerText + +e37.innerText + +e38.innerText + +e39.innerText
+    // e40.innerHTML = `<input type='text' value='${+e26.childNodes[0].value + +e27.childNodes[0].value + +e28.childNodes[0].value + +e29.childNodes[0].value + +e30.childNodes[0].value + +e31.childNodes[0].value + +e32.childNodes[0].value + +e33.childNodes[0].value + +e34.childNodes[0].value + +e35.childNodes[0].value + +e36.childNodes[0].value + +e37.childNodes[0].value + +e38.childNodes[0].value + +e39.childNodes[0].value}'>`
+    e40.innerText = +e26.childNodes[0].value + +e27.childNodes[0].value + +e28.childNodes[0].value + +e29.childNodes[0].value + +e30.childNodes[0].value + +e31.childNodes[0].value + +e32.childNodes[0].value + +e33.childNodes[0].value + +e34.childNodes[0].value + +e35.childNodes[0].value + +e36.childNodes[0].value + +e37.childNodes[0].value + +e38.childNodes[0].value + +e39.childNodes[0].value
+
+    // f40.innerText = Math.min(+e40.innerText, 150000)
+    // f40.innerHTML = `<input type='text' value='${Math.min(+e40.childNodes[0].value, 150000)}'>`
+    f40.innerText = Math.min(+e40.childNodes[0].value, 150000)
+
+    // f43.innerText = Math.min((+e2.innerText * 12) * 0.1, (+e10.innerText * 12))
+    f43.innerHTML = `<input type='text' value='${Math.min((+e2.childNodes[0].value * 12) * 0.1, (+e10.childNodes[0].value * 12))}'>`
     //f52
-    f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
 
-    h52.innerText = +h41.innerText + +h42.innerText + +h43.innerText + +h44.innerText + +h45.innerText + +h46.innerText + +h47.innerText + +h48.innerText + +h49.innerText + +h50.innerText + +h51.innerText
-    h54.innerText = Math.max((+h24.innerText - +h52.innerText), 0)
-    h57.innerText = +h55.innerText - +h56.innerText
-    h59.innerText = +h57.innerText + +h57.innerText
+    // f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
+    f54.innerText = Math.max((+f24.childNodes[0].value - +f52.innerText), 0)
+
+
+    // h52.innerText = +h41.innerText + +h42.innerText + +h43.innerText + +h44.innerText + +h45.innerText + +h46.innerText + +h47.innerText + +h48.innerText + +h49.innerText + +h50.innerText + +h51.innerText
+    // h52.innerHTML = `<input type='text' value='${+h41.childNodes[0].value + +h42.childNodes[0].value + +h43.childNodes[0].value + +h44.childNodes[0].value + +h45.childNodes[0].value + +h46.childNodes[0].value + +h47.childNodes[0].value + +h48.childNodes[0].value + +h49.childNodes[0].value + +h50.childNodes[0].value + +h51.childNodes[0].value}'>`
+    h52.innerText = +h41.childNodes[0].value + +h42.childNodes[0].value + +h43.childNodes[0].value + +h44.childNodes[0].value + +h45.childNodes[0].value + +h46.childNodes[0].value + +h47.childNodes[0].value + +h48.childNodes[0].value + +h49.childNodes[0].value + +h50.childNodes[0].value + +h51.childNodes[0].value
+
+    // h54.innerText = Math.max((+h24.innerText - +h52.innerText), 0)
+    h54.innerText = Math.max((+h24.childNodes[0].value - +h52.childNodes[0].value), 0)
+
+    // h57.innerText = +h55.innerText - +h56.innerText
+    h57.innerHTML = `<input type='text' value='${+h55.childNodes[0].value - +h56.childNodes[0].value}'>`
+
+    // h59.innerText = +h57.innerText + +h57.innerText
+    h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value - +h57.childNodes[0].value}'>`
+
 
 
     const grossContainer = document.getElementById('gross-container')
@@ -901,6 +1022,15 @@
             });
         })
     });
+
+    const alltds = document.querySelectorAll('td')
+    console.log(e9.childNodes[0].value)
+
+    // for(let i = 0; i < alltds.length; i++) {
+    //     alltds[i].addEventListener('click', () => {
+    //         alltds[i].innerHTML = `<input type='text' value='hi'>`
+    //     })
+    // }
 
 
 </script>

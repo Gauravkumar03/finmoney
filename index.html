@@ -174,13 +174,41 @@
     <div class="container">
         <input type="file" id="fileInput">
     </div>
+    <!-- <input type="file" name="file" id="dragInput"> -->
+    <!-- svg for Upload icon -->
+
+
 
     <script type="module">
 
+
+        document.addEventListener('dragover', (e) => {
+            e.preventDefault()
+        });
+        
+
         window.addEventListener('load', function () {
             var upload = document.getElementById('fileInput');
-
+            var dragUpload = document.getElementById('dragInput')
             // Make sure the DOM element exists
+
+            if (dragUpload) {
+                dragUpload.addEventListener('drop', function () {
+                    // Make sure a file was selected
+                    if (dragUpload.files.length > 0) {
+                        var dragReader = new FileReader(); // File reader to read the file 
+
+                        // This event listener will happen when the reader has read the file
+                        
+
+                        // reader.readAsText(upload.files[0]); // Read the uploaded file
+
+                        // window.location.href = "page1.html"
+                    }
+                });
+            }
+
+            
             if (upload) {
                 upload.addEventListener('change', function () {
                     // Make sure a file was selected
@@ -202,7 +230,7 @@
                     }
                 });
             }
-            
+
         });
 
 
