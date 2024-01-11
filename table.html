@@ -814,6 +814,24 @@
         h22c.innerHTML = `<input type='text' value='${dividendVal}'>`
 
         h23.innerHTML = `<input type='text' value='${+f23.childNodes[0].value}'>`
+
+        h24.innerText = +h20.childNodes[0].value + +h22.childNodes[0].value + +h23.childNodes[0].value
+
+        e40.innerText = +e26.childNodes[0].value + +e27.childNodes[0].value + +e28.childNodes[0].value + +e29.childNodes[0].value + +e30.childNodes[0].value + +e31.childNodes[0].value + +e32.childNodes[0].value + +e33.childNodes[0].value + +e34.childNodes[0].value + +e35.childNodes[0].value + +e36.childNodes[0].value + +e37.childNodes[0].value + +e38.childNodes[0].value + +e39.childNodes[0].value
+
+        f40.innerText = Math.min(+e40.childNodes[0].value, 150000)
+
+        f43.innerHTML = `<input type='text' value='${Math.min((+e2.childNodes[0].value * 12) * 0.1, (+e10.childNodes[0].value * 12))}'>`
+
+        f54.innerText = Math.max((+f24.childNodes[0].value - +f52.innerText), 0)
+
+        h52.innerText = +h41.childNodes[0].value + +h42.childNodes[0].value + +h43.childNodes[0].value + +h44.childNodes[0].value + +h45.childNodes[0].value + +h46.childNodes[0].value + +h47.childNodes[0].value + +h48.childNodes[0].value + +h49.childNodes[0].value + +h50.childNodes[0].value + +h51.childNodes[0].value
+
+        h54.innerText = Math.max((+h24.childNodes[0].value - +h52.childNodes[0].value), 0)
+
+        h57.innerHTML = `<input type='text' value='${+h55.childNodes[0].value - +h56.childNodes[0].value}'>`
+
+        h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value - +h57.childNodes[0].value}'>`
     })
 
     // f14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
