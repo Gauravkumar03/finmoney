@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <style>
         #circularcursor {
             background-color: transparent;
@@ -632,6 +633,10 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
@@ -647,9 +652,10 @@
             dividendVal = data.ITR.ITR2.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
         } else if (data.ITR.ITR3 != undefined) {
             dividendVal = data.ITR.ITR3.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
-        } else if (data.ITR.ITR4 != undefined) {
-            dividendVal = data.ITR.ITR4.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
         }
+        else {
+            dividendVal = 0
+        } 
     } else {
         dividendVal = 0
     }
@@ -831,9 +837,16 @@
 
         h54.innerText = Math.max((+h24.innerText - +h52.innerText), 0)
 
+        f57.innerHTML = `<input type='text' value='${+f55.childNodes[0].value - +f56.childNodes[0].value}'>`
+
+        f59.innerHTML = `<input type='text' value='${+f57.childNodes[0].value + +f58.childNodes[0].value}'>`
+
         h57.innerHTML = `<input type='text' value='${+h55.childNodes[0].value - +h56.childNodes[0].value}'>`
 
-        h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value - +h57.childNodes[0].value}'>`
+        h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value + +h58.childNodes[0].value}'>`
+
+        f60.innerHTML = `<input type='text' value='${+f59.childNodes[0].value * 0.4}'>`
+        h60.innerHTML = `<input type='text' value='${+h59.childNodes[0].value * 0.4}'>`
 
         f61.innerText = +f59.childNodes[0].value + +f60.childNodes[0].value
         h61.innerText = +h59.childNodes[0].value + +h60.childNodes[0].value
@@ -913,6 +926,10 @@
     // f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
     f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
 
+    f57.innerHTML = `<input type='text' value='${+f55.childNodes[0].value - +f56.childNodes[0].value}'>`
+
+    f59.innerHTML = `<input type='text' value='${+f57.childNodes[0].value + +f58.childNodes[0].value}'>`
+
 
     // h52.innerText = +h41.innerText + +h42.innerText + +h43.innerText + +h44.innerText + +h45.innerText + +h46.innerText + +h47.innerText + +h48.innerText + +h49.innerText + +h50.innerText + +h51.innerText
     // h52.innerHTML = `<input type='text' value='${+h41.childNodes[0].value + +h42.childNodes[0].value + +h43.childNodes[0].value + +h44.childNodes[0].value + +h45.childNodes[0].value + +h46.childNodes[0].value + +h47.childNodes[0].value + +h48.childNodes[0].value + +h49.childNodes[0].value + +h50.childNodes[0].value + +h51.childNodes[0].value}'>`
@@ -924,8 +941,11 @@
     // h57.innerText = +h55.innerText - +h56.innerText
     h57.innerHTML = `<input type='text' value='${+h55.childNodes[0].value - +h56.childNodes[0].value}'>`
 
-    // h59.innerText = +h57.innerText + +h57.innerText
-    h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value - +h57.childNodes[0].value}'>`
+    // h59.innerText = +h57.innerText + +h58.innerText
+    h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value + +h58.childNodes[0].value}'>`
+
+    f60.innerHTML = `<input type='text' value='${+f59.childNodes[0].value * 0.4}'>`
+    h60.innerHTML = `<input type='text' value='${+h59.childNodes[0].value * 0.4}'>`
 
     f61.innerText = +f59.childNodes[0].value + +f60.childNodes[0].value
     h61.innerText = +h59.childNodes[0].value + +h60.childNodes[0].value
