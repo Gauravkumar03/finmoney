@@ -230,17 +230,21 @@
 
             let finalData
 
-            if (data.ITR.ITR1 != undefined) {
-                finalData = data.ITR.ITR1
-            } else if (data.ITR.ITR2 != undefined) {
-                finalData = data.ITR.ITR2
-            } else if (data.ITR.ITR3 != undefined) {
-                finalData = data.ITR.ITR3
-            } else if (data.ITR.ITR4 != undefined) {
-                finalData = data.ITR.ITR4
-            } else if (data.ITR.ITR5 != undefined) {
-                finalData = data.ITR.ITR5
+            if (data) {
+                if (data.ITR.ITR1 != undefined) {
+                    finalData = data.ITR.ITR1
+                } else if (data.ITR.ITR2 != undefined) {
+                    finalData = data.ITR.ITR2
+                } else if (data.ITR.ITR3 != undefined) {
+                    finalData = data.ITR.ITR3
+                } else if (data.ITR.ITR4 != undefined) {
+                    finalData = data.ITR.ITR4
+                } else if (data.ITR.ITR5 != undefined) {
+                    finalData = data.ITR.ITR5
+                }
             }
+
+
 
             const updateBtn = document.getElementById('update')
             updateBtn.addEventListener('click', fun)
@@ -248,13 +252,20 @@
             let name
             let dob
 
-            if (data.ITR.ITR1 != undefined || data.ITR.ITR4 != undefined) {
-                name = finalData.Verification.Declaration.AssesseeVerName
-                dob = finalData.PersonalInfo.DOB
+            if (data) {
+                if (data.ITR.ITR1 != undefined || data.ITR.ITR4 != undefined) {
+                    name = finalData.Verification.Declaration.AssesseeVerName
+                    dob = finalData.PersonalInfo.DOB
+                } else {
+                    name = finalData.Verification.Declaration.AssesseeVerName
+                    dob = finalData.PartA_GEN1.PersonalInfo.DOB
+                }
             } else {
-                name = finalData.Verification.Declaration.AssesseeVerName
-                dob = finalData.PartA_GEN1.PersonalInfo.DOB
+                name = ''
+                dob = ''
             }
+
+
             document.getElementById('name').value = name
             document.getElementById('dob').value = dob
             document.getElementById("taxForm").addEventListener("submit", function (event) {
