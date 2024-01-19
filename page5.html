@@ -146,6 +146,54 @@
             font-weight: bold;
             color: #333;
         }
+
+        .text {
+            font-size: 23px;
+            color: #494949;
+        }
+
+        .toggle {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            border: 2px solid #494949;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .circle {
+            position: absolute;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            background-color: #494949;
+            transition: .3s;
+        }
+
+        .active {
+            border-color: rgb(85, 227, 180);
+        }
+
+        .active+.text {
+            color: rgb(85, 227, 180);
+        }
+
+        .active .circle {
+            left: 100%;
+            transform: translateX(-100%);
+            transition: .3s;
+            background-color: green;
+        }
+
+        /* .flex-container {
+            display: flex;
+            justify-content: space-around;
+        } */
     </style>
 </head>
 
@@ -171,7 +219,7 @@
                         <a class="dropdown-item" href="page3.html">Tax Calculator based on Income</a>
                         <a class="dropdown-item" href="page4.html">Basic Tax calculator</a>
                         <a class="dropdown-item" href="page5.html">HRA</a>
-                        <a class="dropdown-item" href="page6.html">Tax Deduction Calc</a>
+                        <a class="dropdown-item" href="page6.html">ATD Calculator</a>
                         <a class="dropdown-item" href="page7.html">House Property Income</a>
 
                         <a class="dropdown-item" href="page9.html">Capital Gains and Income</a>
@@ -185,6 +233,7 @@
                         <a class="dropdown-item" href="page17.html">Education Cess Calculator</a>
                         <a class="dropdown-item" href="page18.html">Tax Deduction Calculator</a>
                         <a class="dropdown-item" href="taxform.html">Tax Form</a>
+                        <a class="dropdown-item" href="huf.html">HUF Calculator</a>
                         <a class="dropdown-item" href="table.html">ITR Table</a>
 
                     </div>
@@ -197,7 +246,15 @@
         <label for="basicSalary"></label>
         <input type="number" id="basicSalary" placeholder="Enter basic salary">
         <br>
-        <label for="cityType">Is your city a metro city? (Yes or No):</label>
+        <div class="flex-container">
+            <label for="cityType">Is your city a metro city? (Yes or No):</label>
+            <div class="container2">
+                <div class="toggle" id="toggleContainer">
+                    <div class="circle"></div>
+                </div>
+                <!-- <span class="text">FF</span> -->
+            </div>
+        </div>
         <input type="text" id="cityType" placeholder="Enter city type">
         <br>
         <label for="hraAllowance">Enter HRA Allowance:</label>
@@ -213,6 +270,7 @@
         <br>
         <p id="result"></p>
     </div>
+    
 
     <script type="module">
         const jsonData = localStorage.getItem('jsonData')
@@ -235,6 +293,7 @@
 
         // const city = data.ITR.ITR2.PartA_GEN1.PersonalInfo.Address.CityOrTownOrDistrict
         let city
+        let active
 
         if (data.ITR.ITR1 != undefined || data.ITR.ITR4 != undefined) {
             city = finalData.PersonalInfo.Address.CityOrTownOrDistrict
@@ -243,9 +302,12 @@
         }
         if (city == 'NEW DELHI' || city == 'MUMBAI' || city == 'CHENNAI' || city == 'KOLKATA') {
             document.getElementById('cityType').value = 'Y'
+            active = true
         } else {
             document.getElementById('cityType').value = 'N'
+            active = false
         }
+
 
         const btn = document.getElementById('btn')
         btn.addEventListener('click', calculateHRA)
@@ -282,13 +344,29 @@
         }
 
         $(document).ready(function () {
-                $(document).on('mousemove', function (e) {
-                    $('#circularcursor').css({
-                        left: e.pageX,
-                        top: e.pageY
-                    });
-                })
-            });
+            $(document).on('mousemove', function (e) {
+                $('#circularcursor').css({
+                    left: e.pageX,
+                    top: e.pageY
+                });
+            })
+        });
+
+        document.getElementById('toggleContainer').addEventListener('click', toggle)
+        function toggle() {
+            let toggle = document.querySelector('.toggle')
+            // let text = document.querySelector('.text')
+            active = !active
+            if (active) {
+                toggle.classList.add('active')
+                // text.innerHTML = 'N'
+                document.getElementById('cityType').value = 'Y'
+            } else {
+                toggle.classList.remove('active')
+                // text.innerHTML = 'FF'
+                document.getElementById('cityType').value = 'N'
+            }
+        }
     </script>
 </body>
 

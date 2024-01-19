@@ -168,7 +168,7 @@
                         <a class="dropdown-item" href="page3.html">Tax Calculator based on Income</a>
                         <a class="dropdown-item" href="page4.html">Basic Tax calculator</a>
                         <a class="dropdown-item" href="page5.html">HRA</a>
-                        <a class="dropdown-item" href="page6.html">Tax Deduction Calc</a>
+                        <a class="dropdown-item" href="page6.html">ATD Calculator</a>
                         <a class="dropdown-item" href="page7.html">House Property Income</a>
 
                         <a class="dropdown-item" href="page9.html">Capital Gains and Income</a>
@@ -182,6 +182,7 @@
                         <a class="dropdown-item" href="page17.html">Education Cess Calculator</a>
                         <a class="dropdown-item" href="page18.html">Tax Deduction Calculator</a>
                         <a class="dropdown-item" href="taxform.html">Tax Form</a>
+                        <a class="dropdown-item" href="huf.html">HUF Calculator</a>
                         <a class="dropdown-item" href="table.html">ITR Table</a>
 
                     </div>
@@ -191,18 +192,21 @@
     </nav>
     <div class="container">
 
-        <h1>Tax Deductions Calculator</h1>
-        <label for="age">Enter your age:</label>
-        <input type="number" id="age" placeholder="Enter your age">
-        <br>
-        <label for="healthInsurancePremium">Enter the amount of health insurance premium paid:</label>
-        <input type="number" id="healthInsurancePremium" placeholder="Enter health insurance premium">
-        <br>
-        <label for="medicalExpenses">Enter the amount of medical expenses incurred:</label>
-        <input type="number" id="medicalExpenses" placeholder="Enter medical expenses">
-        <br>
-        <label for="hasDependent">Do you have a dependent? (Yes/No):</label>
-        <input type="text" id="hasDependent" placeholder="Enter Yes or No">
+        <h1>ATD Calculator</h1>
+        <div id="form-container">
+            <label for="age">Enter your age:</label>
+            <input type="number" id="age" placeholder="Enter your age">
+            <br>
+            <label for="healthInsurancePremium">Enter the amount of health insurance premium paid:</label>
+            <input type="number" id="healthInsurancePremium" placeholder="Enter health insurance premium">
+            <br>
+            <label for="medicalExpenses">Enter the amount of medical expenses incurred:</label>
+            <input type="number" id="medicalExpenses" placeholder="Enter medical expenses">
+            <br>
+            <label for="hasDependent">Do you have a dependent? (Yes/No):</label>
+            <input type="text" id="hasDependent" placeholder="Enter Yes or No">
+        </div>
+
         <br>
         <button id="btn">Calculate Tax Deductions</button>
         <br>
@@ -211,6 +215,7 @@
 
     <script type="module">
         const btn = document.getElementById('btn')
+        const formContainer = document.getElementById('form-container')
         btn.addEventListener('click', calculateTaxDeductions)
         function calculateTaxDeductions() {
             const age = parseInt(document.getElementById("age").value);
@@ -225,6 +230,17 @@
                 const healthInsurancePremiumDependent = parseInt(prompt("Enter the amount of health insurance premium paid for dependent:"));
                 const medicalExpensesDependent = parseInt(prompt("Enter the amount of medical expenses incurred for dependent:"));
                 dependentTaxDeduction = taxDeduction80DDependent(dependentAge, healthInsurancePremiumDependent, medicalExpensesDependent, hasDependent);
+                // const labelAgeDiv = document.createElement('label')
+                // labelAgeDiv.innerText = `Enter dependent's age:`
+                // const dependentAge = document.createElement('input')
+                // const labelHealthDiv = document.createElement('label')
+                // labelHealthDiv.innerText = `Enter the amount of health insurance premium paid for dependent:`
+                // const healthInsurancePremiumDependent = document.createElement('input')
+                // const labelMedicalDiv = document.createElement('label')
+                // labelMedicalDiv.innerText = `Enter the amount of medical expenses incurred for dependent:`
+                // const medicalExpensesDependent = document.createElement('input')
+                // formContainer.append(labelAgeDiv, dependentAge, labelHealthDiv, healthInsurancePremiumDependent, labelMedicalDiv, medicalExpensesDependent)
+                // dependentTaxDeduction = taxDeduction80DDependent(dependentAge.value, medicalExpensesDependent.value, medicalExpensesDependent.value, hasDependent)
             }
 
             const taxDeductionUnder80D = taxDeduction80D(age, healthInsurancePremium, medicalExpenses) + dependentTaxDeduction;
@@ -242,17 +258,17 @@
             if (hasDependent) {
                 dependentDeduction = (dependentAge >= 60) ? Math.min(healthInsurancePremium + medicalExpenses, 50000) : Math.min(healthInsurancePremium + medicalExpenses, 25000);
             }
-            return dependentDeduction;
+            // return dependentDeduction;
         }
 
         $(document).ready(function () {
-                $(document).on('mousemove', function (e) {
-                    $('#circularcursor').css({
-                        left: e.pageX,
-                        top: e.pageY
-                    });
-                })
-            });
+            $(document).on('mousemove', function (e) {
+                $('#circularcursor').css({
+                    left: e.pageX,
+                    top: e.pageY
+                });
+            })
+        });
     </script>
 </body>
 
