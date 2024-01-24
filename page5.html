@@ -270,43 +270,52 @@
         <br>
         <p id="result"></p>
     </div>
-    
+
 
     <script type="module">
         const jsonData = localStorage.getItem('jsonData')
         const data = JSON.parse(jsonData)
 
         let finalData
-
-        if (data.ITR.ITR1 != undefined) {
-            finalData = data.ITR.ITR1
-        } else if (data.ITR.ITR2 != undefined) {
-            finalData = data.ITR.ITR2
-        } else if (data.ITR.ITR3 != undefined) {
-            finalData = data.ITR.ITR3
-        } else if (data.ITR.ITR4 != undefined) {
-            finalData = data.ITR.ITR4
-        } else if (data.ITR.ITR5 != undefined) {
-            finalData = data.ITR.ITR5
+        if (data) {
+            if (data.ITR.ITR1 != undefined) {
+                finalData = data.ITR.ITR1
+            } else if (data.ITR.ITR2 != undefined) {
+                finalData = data.ITR.ITR2
+            } else if (data.ITR.ITR3 != undefined) {
+                finalData = data.ITR.ITR3
+            } else if (data.ITR.ITR4 != undefined) {
+                finalData = data.ITR.ITR4
+            } else if (data.ITR.ITR5 != undefined) {
+                finalData = data.ITR.ITR5
+            }
         }
+
 
 
         // const city = data.ITR.ITR2.PartA_GEN1.PersonalInfo.Address.CityOrTownOrDistrict
         let city
         let active
 
-        if (data.ITR.ITR1 != undefined || data.ITR.ITR4 != undefined) {
-            city = finalData.PersonalInfo.Address.CityOrTownOrDistrict
+
+        if (data) {
+            if (data.ITR.ITR1 != undefined || data.ITR.ITR4 != undefined) {
+                city = finalData.PersonalInfo.Address.CityOrTownOrDistrict
+            } else {
+                city = finalData.PartA_GEN1.PersonalInfo.Address.CityOrTownOrDistrict
+            }
+            if (city == 'NEW DELHI' || city == 'MUMBAI' || city == 'CHENNAI' || city == 'KOLKATA') {
+                document.getElementById('cityType').value = 'Y'
+                active = true
+            } else {
+                document.getElementById('cityType').value = 'N'
+                active = false
+            }
         } else {
-            city = finalData.PartA_GEN1.PersonalInfo.Address.CityOrTownOrDistrict
-        }
-        if (city == 'NEW DELHI' || city == 'MUMBAI' || city == 'CHENNAI' || city == 'KOLKATA') {
-            document.getElementById('cityType').value = 'Y'
-            active = true
-        } else {
-            document.getElementById('cityType').value = 'N'
+            city = ''
             active = false
         }
+
 
 
         const btn = document.getElementById('btn')

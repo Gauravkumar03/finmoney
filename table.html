@@ -428,7 +428,7 @@
             <tr>
                 <td style="width:50%" colspan="2">Add: Income from Other Sources</td>
                 <td id="f23"><input type="text" value="0"></td>
-                <td id="h23"></td>
+                <td id="h23"><input type="text" value="0"></td>
             </tr>
             <tr>
                 <th style="width:50%" colspan="2">Gross Total Income:</th>
@@ -600,6 +600,26 @@
                 <td id="h55"><input type="text" value="0"></td>
             </tr>
             <tr>
+                <td colspan="2">Income Taxable @ special Rates</td>
+                <td id="f54a"><input type="text" value="0"></td>
+                <td id="h54a"><input type="text" value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Aggregate Income</td>
+                <td id="f54b"><input type="text" value="0"></td>
+                <td id="h54b"><input type="text" value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Tax @ Normal Rates</td>
+                <td id="f54c"><input type="text" value="0"></td>
+                <td id="h54c"><input type="text" value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Tax @ Special Rates</td>
+                <td id="f54d"><input type="text" value="0"></td>
+                <td id="h54d"><input type="text" value="0"></td>
+            </tr>
+            <tr>
                 <td colspan="2">Less: Rebate 87A</td>
                 <td id="f56"><input type="text" value="0"></td>
                 <td id="h56"><input type="text" value="0"></td>
@@ -629,6 +649,36 @@
                 <th id="f61"></th>
                 <th id="h61"></th>
             </tr>
+            <tr>
+                <td colspan="2">Advance Tax</td>
+                <td id="f62"><input type="text" value="0"></td>
+                <td id="h62"><input type="text" value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="2">TDS</td>
+                <td id="f63"><input type="text" value="0"></td>
+                <td id="h63"><input type="text" value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Self Assessment Tax</td>
+                <td id="f64"><input type="text" value="0"></td>
+                <td id="h64"><input type="text" value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Total Taxes Paid</td>
+                <td id="f65"><input type="text" value="0"></td>
+                <td id="h65"><input type="text" value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Balance Tax Payable</td>
+                <td id="f66"><input type="text" value="0"></td>
+                <td id="h66"><input type="text" value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Refund Due</td>
+                <td id="f67"><input type="text" value="0"></td>
+                <td id="h67"><input type="text" value="0"></td>
+            </tr>
         </table>
         <div>
             <button id="minimize-income-btn">-</button>
@@ -647,25 +697,128 @@
 
     const rentData = localStorage.getItem('rent_sum')
     const rentValue = JSON.parse(rentData)
-    console.log(rentValue)
 
     const jsonData = localStorage.getItem('jsonData')
     const data = JSON.parse(jsonData)
 
     let dividendVal
+    let grossSalary
+    let deductionVal
+    let incomeSalary
+    let hra
+    let professionalTax
+    let otherSources
+    let incomeCapitalGain
+    let totalInvestment
+    let sec80E
+    let sec80TTA
+    let totalDeductions
+    let totalIncome
+    let incomeSpecialRate
+    let aggregateIncome
+    let taxNormalRate
+    let taxSpecialRate
+    let incomeTax
+    let rebate
+    let education
+    let grossTaxLiability
+    let advanceTax
+    let tds
+    let selfAssessmentTax
+    let totalTaxesPaid
+    let balanceTaxPayable
+    let refundDue
     if (data) {
         if (data.ITR.ITR2 != undefined) {
             dividendVal = data.ITR.ITR2.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
+            grossSalary = data.ITR.ITR2.ScheduleS.TotalGrossSalary
+            deductionVal = data.ITR.ITR2.ScheduleS.DeductionUnderSection16ia
+            incomeSalary = data.ITR.ITR2.ScheduleS.TotIncUnderHeadSalaries
+            hra = data.ITR.ITR2.ScheduleS.AllwncExemptUs10.AllwncExemptUs10Dtls[0].SalOthAmount
+            professionalTax = data.ITR.ITR2.ScheduleS.ProfessionalTaxUs16iii
+            otherSources = data.ITR.ITR2.ScheduleOS.IncChargeable
+            incomeCapitalGain = data.ITR.ITR2.ScheduleCGFor23.TotScheduleCGFor23
+            totalInvestment = data.ITR.ITR2.ScheduleVIA.DeductUndChapVIA.Section80C
+            sec80E = data.ITR.ITR2.ScheduleVIA.DeductUndChapVIA.Section80E
+            sec80TTA = data.ITR.ITR2.ScheduleVIA.DeductUndChapVIA.Section80TTA
+            totalDeductions = data.ITR.ITR2.ScheduleVIA.DeductUndChapVIA.TotalChapVIADeductions
+            totalIncome = data.ITR.ITR2['PartB-TI'].TotalIncome
+            incomeSpecialRate = data.ITR.ITR2['PartB-TI'].IncChargeableTaxSplRates
+            aggregateIncome = data.ITR.ITR2['PartB-TI'].AggregateIncome
+            taxNormalRate = data.ITR.ITR2['PartB_TTI'].ComputationOfTaxLiability.TaxPayableOnTI.TaxAtNormalRatesOnAggrInc
+            taxSpecialRate = data.ITR.ITR2['PartB_TTI'].ComputationOfTaxLiability.TaxPayableOnTI.TaxAtSpecialRates
+            incomeTax = data.ITR.ITR2['PartB_TTI'].ComputationOfTaxLiability.TaxPayableOnTI.TaxPayableOnTotInc
+            rebate = data.ITR.ITR2['PartB_TTI'].ComputationOfTaxLiability.Rebate87A
+            education = data.ITR.ITR2['PartB_TTI'].ComputationOfTaxLiability.EducationCess
+            grossTaxLiability = data.ITR.ITR2['PartB_TTI'].ComputationOfTaxLiability.GrossTaxLiability
+            advanceTax = data.ITR.ITR2['PartB_TTI'].TaxPaid.TaxesPaid.AdvanceTax
+            tds = data.ITR.ITR2['PartB_TTI'].TaxPaid.TaxesPaid.TDS
+            selfAssessmentTax = data.ITR.ITR2['PartB_TTI'].TaxPaid.TaxesPaid.SelfAssessmentTax
+            totalTaxesPaid = data.ITR.ITR2['PartB_TTI'].TaxPaid.TaxesPaid.TotalTaxesPaid
+            balanceTaxPayable = data.ITR.ITR2['PartB_TTI'].TaxPaid.BalTaxPayable
+            refundDue = data.ITR.ITR2['PartB_TTI'].Refund.RefundDue
+
         } else if (data.ITR.ITR3 != undefined) {
             dividendVal = data.ITR.ITR3.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
         }
         else {
             dividendVal = 0
-        } 
+            grossSalary = 0
+            deductionVal = 0
+            incomeSalary = 0
+            hra = 0
+            professionalTax = 0
+            otherSources = 0
+            incomeCapitalGain = 0
+            totalInvestment = 0
+            sec80E = 0
+            sec80TTA = 0
+            totalDeductions = 0
+            totalIncome = 0
+            incomeSpecialRate = 0
+            aggregateIncome = 0
+            taxNormalRate = 0
+            taxSpecialRate = 0
+            incomeTax = 0
+            rebate = 0
+            education = 0
+            grossTaxLiability = 0
+            advanceTax = 0
+            tds = 0
+            selfAssessmentTax = 0
+            totalTaxesPaid = 0
+            balanceTaxPayable = 0
+            refundDue = 0
+        }
     } else {
         dividendVal = 0
+        grossSalary = 0
+        deductionVal = 0
+        incomeSalary = 0
+        hra = 0
+        professionalTax = 0
+        otherSources = 0
+        incomeCapitalGain = 0
+        totalInvestment = 0
+        sec80E = 0
+        sec80TTA = 0
+        totalDeductions = 0
+        totalIncome = 0
+        incomeSpecialRate = 0
+        aggregateIncome = 0
+        taxNormalRate = 0
+        taxSpecialRate = 0
+        incomeTax = 0
+        rebate = 0
+        education = 0
+        grossTaxLiability = 0
+        advanceTax = 0
+        tds = 0
+        selfAssessmentTax = 0
+        totalTaxesPaid = 0
+        balanceTaxPayable = 0
+        refundDue = 0
     }
-
 
 
 
@@ -690,11 +843,13 @@
     const f15 = document.getElementById('f15')
     const f16 = document.getElementById('f16')
     const f17 = document.getElementById('f17')
+    const f17b = document.getElementById('f17b')
     const f18 = document.getElementById('f18')
     const f19 = document.getElementById('f19')
     const f20 = document.getElementById('f20')
     const f21 = document.getElementById('f21')
     const f22 = document.getElementById('f22')
+    const f22b = document.getElementById('f22b')
     const f22c = document.getElementById('f22c')
     const f23 = document.getElementById('f23')
     const f24 = document.getElementById('f24')
@@ -702,11 +857,13 @@
     const h15 = document.getElementById('h15')
     const h16 = document.getElementById('h16')
     const h17 = document.getElementById('h17')
+    const h17b = document.getElementById('h17b')
     const h18 = document.getElementById('h18')
     const h19 = document.getElementById('h19')
     const h20 = document.getElementById('h20')
     const h21 = document.getElementById('h21')
     const h22 = document.getElementById('h22')
+    const h22b = document.getElementById('h22b')
     const h22c = document.getElementById('h22c')
     const h23 = document.getElementById('h23')
     const h24 = document.getElementById('h24')
@@ -739,6 +896,10 @@
     const f51 = document.getElementById('f51')
     const f52 = document.getElementById('f52')
     const f54 = document.getElementById('f54')
+    const f54a = document.getElementById('f54a')
+    const f54b = document.getElementById('f54b')
+    const f54c = document.getElementById('f54c')
+    const f54d = document.getElementById('f54d')
     const f55 = document.getElementById('f55')
     const f56 = document.getElementById('f56')
     const f57 = document.getElementById('f57')
@@ -746,6 +907,12 @@
     const f59 = document.getElementById('f59')
     const f60 = document.getElementById('f60')
     const f61 = document.getElementById('f61')
+    const f62 = document.getElementById('f62')
+    const f63 = document.getElementById('f63')
+    const f64 = document.getElementById('f64')
+    const f65 = document.getElementById('f65')
+    const f66 = document.getElementById('f66')
+    const f67 = document.getElementById('f67')
     const h40 = document.getElementById('h40')
     const h41 = document.getElementById('h41')
     const h42 = document.getElementById('h42')
@@ -760,6 +927,10 @@
     const h51 = document.getElementById('h51')
     const h52 = document.getElementById('h52')
     const h54 = document.getElementById('h54')
+    const h54a = document.getElementById('h54a')
+    const h54b = document.getElementById('h54b')
+    const h54c = document.getElementById('h54c')
+    const h54d = document.getElementById('h54d')
     const h55 = document.getElementById('h55')
     const h56 = document.getElementById('h56')
     const h57 = document.getElementById('h57')
@@ -768,6 +939,12 @@
     const h60 = document.getElementById('h60')
     const h61 = document.getElementById('h61')
     const h62 = document.getElementById('h62')
+    const h63 = document.getElementById('h63')
+    const h64 = document.getElementById('h64')
+    const h65 = document.getElementById('h65')
+    const h66 = document.getElementById('h66')
+    const h67 = document.getElementById('h67')
+
 
 
     // h8.innerText = Math.max((e10.innerText + e26.innerText) - 75000, 0)
@@ -789,59 +966,95 @@
 
         h8.innerHTML = `<input type='text' value='${Math.max((e10.childNodes[0].value + e26.childNodes[0].value) - 75000, 0)}'>`
 
-        f14.innerHTML = `<input type='text' value='${(totalMonthlyGrossSalary.innerText * 12) + +h8.innerText}'>`
+        f14.innerHTML = `<input type='text' value='${(totalMonthlyGrossSalary.innerText * 12) + +h8.childNodes[0].value + grossSalary}'>`
 
         f15.innerHTML = `<input type='text' value='${(+e9.childNodes[0].value + Math.min(+h2.childNodes[0].value, 200) + Math.min(+h3.childNodes[0].value, 600) + +h4.childNodes[0].value + +h5.childNodes[0].value + +h6.childNodes[0].value) * 12}'>`
 
+        f16.innerHTML = `<input type='text' value='${professionalTax}'>`
+
+        f17.innerHTML = `<input type='text' value='${Math.max(Math.min(+f14.childNodes[0].value, 50000), 0) + deductionVal}'>`
+
+        f17b.innerHTML = `<input type='text' value='${hra}'>`
+
         f19.innerHTML = `<input type='text' value='${f19val}'>`
 
-        f20.innerHTML = `<input type='text' value='${+f14.childNodes[0].value - +f15.childNodes[0].value - +f16.childNodes[0].value - +f17.childNodes[0].value - +f18.childNodes[0].value - +f19.childNodes[0].value}'>`
+        f20.innerHTML = `<input type='text' value='${+f14.childNodes[0].value - +f15.childNodes[0].value - +f16.childNodes[0].value - +f17.childNodes[0].value - +f18.childNodes[0].value - +f19.childNodes[0].value + incomeSalary}'>`
 
-        f24.innerText = +f20.childNodes[0].value + +f21.childNodes[0].value + +f22.childNodes[0].value
+        f22b.innerHTML = `<input type='text' value='${incomeCapitalGain}'>`
 
         f22c.innerHTML = `<input type='text' value='${dividendVal}'>`
 
-        h14.innerHTML = `<input type='text' value='${totalMonthlyGrossSalary.innerText * 12 + +h8.childNodes[0].value}'>`
+        f23.innerHTML = `<input type='text' value='${otherSources}'>`
+
+        f24.innerText = +f20.childNodes[0].value + +f21.childNodes[0].value + +f22.childNodes[0].value
+
+        h14.innerHTML = `<input type='text' value='${totalMonthlyGrossSalary.innerText * 12 + +h8.childNodes[0].value + grossSalary}'>`
 
         h15.innerHTML = `<input type='text' value='${+h6.childNodes[0].value * 12}'>`
 
-        h17.innerHTML = `<input type='text' value='${Math.max(Math.min(+h14.childNodes[0].value, 50000), 0)}'>`
+        h16.innerHTML = `<input type='text' value='${professionalTax}'>`
 
-        h20.innerHTML = `<input type='text' value='${+h14.childNodes[0].value - +h15.childNodes[0].value - +h17.childNodes[0].value}'>`
+        h17.innerHTML = `<input type='text' value='${Math.max(Math.min(+h14.childNodes[0].value, 50000), 0) + deductionVal}'>`
+
+        h17.innerHTML = `<input type='text' value='${hra}'>`
+
+        h20.innerHTML = `<input type='text' value='${+h14.childNodes[0].value - +h15.childNodes[0].value - +h17.childNodes[0].value + incomeSalary}'>`
+
+        h22b.innerHTML = `<input type='text' value='${incomeCapitalGain}'>`
 
         // h22.innerHTML = `<input type='text' value='${+f22.childNodes[0].value}'>`
 
         h22c.innerHTML = `<input type='text' value='${dividendVal}'>`
 
-        h14.innerHTML = `<input type='text' value='${totalMonthlyGrossSalary.innerText * 12 + +h8.childNodes[0].value}'>`
-
-        h15.innerHTML = `<input type='text' value='${+h6.childNodes[0].value * 12}'>`
-
-        h17.innerHTML = `<input type='text' value='${Math.max(Math.min(+h14.childNodes[0].value, 50000), 0)}'>`
-
-        h20.innerHTML = `<input type='text' value='${+h14.childNodes[0].value - +h15.childNodes[0].value - +h17.childNodes[0].value}'>`
 
         h22.innerHTML = `<input type='text' value='${+f22.childNodes[0].value}'>`
 
-        h22c.innerHTML = `<input type='text' value='${dividendVal}'>`
 
-        h23.innerHTML = `<input type='text' value='${+f23.childNodes[0].value}'>`
+        h23.innerHTML = `<input type='text' value='${otherSources}'>`
 
         h24.innerText = +h20.childNodes[0].value + +h22.childNodes[0].value + +h23.childNodes[0].value
 
-        e40.innerText = +e26.childNodes[0].value + +e27.childNodes[0].value + +e28.childNodes[0].value + +e29.childNodes[0].value + +e30.childNodes[0].value + +e31.childNodes[0].value + +e32.childNodes[0].value + +e33.childNodes[0].value + +e34.childNodes[0].value + +e35.childNodes[0].value + +e36.childNodes[0].value + +e37.childNodes[0].value + +e38.childNodes[0].value + +e39.childNodes[0].value
+        e40.innerText = +e26.childNodes[0].value + +e27.childNodes[0].value + +e28.childNodes[0].value + +e29.childNodes[0].value + +e30.childNodes[0].value + +e31.childNodes[0].value + +e32.childNodes[0].value + +e33.childNodes[0].value + +e34.childNodes[0].value + +e35.childNodes[0].value + +e36.childNodes[0].value + +e37.childNodes[0].value + +e38.childNodes[0].value + +e39.childNodes[0].value + totalInvestment
 
         f40.innerText = Math.min(+e40.innerText, 150000)
 
+
+
         f43.innerHTML = `<input type='text' value='${Math.min((+e2.childNodes[0].value * 12) * 0.1, (+e10.childNodes[0].value * 12))}'>`
 
-        f52.innerText = +f40.innerText + Math.min(+f41.childNodes[0].value, 75000) + Math.min(+f42.childNodes[0].value, 50000) + +f43.childNodes[0].value + Math.min(+f44.childNodes[0].value, 125000) + Math.min(+f45.childNodes[0].value, 125000) + +f46.childNodes[0].value + Math.min(+f47.childNodes[0].value, 50000) + Math.min(+f48.childNodes[0].value, 150000) + +f49.childNodes[0].value + Math.min(+f50.childNodes[0].value, 10000) + Math.min(+f51.childNodes[0].value, 125000)
+        f46.innerHTML = `<input type='text' value='${sec80E}'>`
 
-        f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
+        f50.innerHTML = `<input type='text' value='${sec80TTA}'>`
 
-        h52.innerText = +h41.childNodes[0].value + +h42.childNodes[0].value + +h43.childNodes[0].value + +h44.childNodes[0].value + +h45.childNodes[0].value + +h46.childNodes[0].value + +h47.childNodes[0].value + +h48.childNodes[0].value + +h49.childNodes[0].value + +h50.childNodes[0].value + +h51.childNodes[0].value
+        f52.innerText = +f40.innerText + Math.min(+f41.childNodes[0].value, 75000) + Math.min(+f42.childNodes[0].value, 50000) + +f43.childNodes[0].value + Math.min(+f44.childNodes[0].value, 125000) + Math.min(+f45.childNodes[0].value, 125000) + +f46.childNodes[0].value + Math.min(+f47.childNodes[0].value, 50000) + Math.min(+f48.childNodes[0].value, 150000) + +f49.childNodes[0].value + Math.min(+f50.childNodes[0].value, 10000) + Math.min(+f51.childNodes[0].value, 125000 + totalDeductions)
 
-        h54.innerText = Math.max((+h24.innerText - +h52.innerText), 0)
+        f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0 + totalIncome)
+
+        f54a.innerHTML = `<input type='text' value='${incomeSpecialRate}'>`
+        f54b.innerHTML = `<input type='text' value='${aggregateIncome}'>`
+        f54c.innerHTML = `<input type='text' value='${taxNormalRate}'>`
+        f54d.innerHTML = `<input type='text' value='${taxSpecialRate}'>`
+
+        f55.innerHTML = `<input type='text' value='${incomeTax}'>`
+
+        f56.innerHTML = `<input type='text' value='${rebate}'>`
+
+        h46.innerHTML = `<input type='text' value='${sec80E}'>`
+
+        h50.innerHTML = `<input type='text' value='${sec80TTA}'>`
+
+        h52.innerText = +h41.childNodes[0].value + +h42.childNodes[0].value + +h43.childNodes[0].value + +h44.childNodes[0].value + +h45.childNodes[0].value + +h46.childNodes[0].value + +h47.childNodes[0].value + +h48.childNodes[0].value + +h49.childNodes[0].value + +h50.childNodes[0].value + +h51.childNodes[0].value + totalDeductions
+
+        h54.innerText = Math.max((+h24.innerText - +h52.innerText), 0 + totalIncome)
+
+        h54a.innerHTML = `<input type='text' value='${incomeSpecialRate}'>`
+        h54b.innerHTML = `<input type='text' value='${aggregateIncome}'>`
+        h54c.innerHTML = `<input type='text' value='${taxNormalRate}'>`
+        h54d.innerHTML = `<input type='text' value='${taxSpecialRate}'>`
+
+        h55.innerHTML = `<input type='text' value='${incomeTax}'>`
+
+        h56.innerHTML = `<input type='text' value='${rebate}'>`
 
         f57.innerHTML = `<input type='text' value='${+f55.childNodes[0].value - +f56.childNodes[0].value}'>`
 
@@ -851,18 +1064,40 @@
 
         h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value + +h58.childNodes[0].value}'>`
 
-        f60.innerHTML = `<input type='text' value='${+f59.childNodes[0].value * 0.4}'>`
-        h60.innerHTML = `<input type='text' value='${+h59.childNodes[0].value * 0.4}'>`
+        f60.innerHTML = `<input type='text' value='${+f59.childNodes[0].value * 0.4 + education}'>`
+        h60.innerHTML = `<input type='text' value='${+h59.childNodes[0].value * 0.4 + education}'>`
 
-        f61.innerText = +f59.childNodes[0].value + +f60.childNodes[0].value
-        h61.innerText = +h59.childNodes[0].value + +h60.childNodes[0].value
+        f61.innerText = +f59.childNodes[0].value + +f60.childNodes[0].value + grossTaxLiability
+        h61.innerText = +h59.childNodes[0].value + +h60.childNodes[0].value + grossTaxLiability
+
+        f62.innerHTML = `<input type='text' value='${advanceTax}'>`
+        h62.innerHTML = `<input type='text' value='${advanceTax}'>`
+
+        f63.innerHTML = `<input type='text' value='${tds}'>`
+        h63.innerHTML = `<input type='text' value='${tds}'>`
+
+        f64.innerHTML = `<input type='text' value='${selfAssessmentTax}'>`
+        h64.innerHTML = `<input type='text' value='${selfAssessmentTax}'>`
+
+        f65.innerHTML = `<input type='text' value='${totalTaxesPaid}'>`
+        h65.innerHTML = `<input type='text' value='${totalTaxesPaid}'>`
+
+        f66.innerHTML = `<input type='text' value='${balanceTaxPayable}'>`
+        h66.innerHTML = `<input type='text' value='${balanceTaxPayable}'>`
+
+        f67.innerHTML = `<input type='text' value='${refundDue}'>`
+        h67.innerHTML = `<input type='text' value='${refundDue}'>`
     })
 
     // f14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
-    f14.innerHTML = `<input type='text' value='${(totalMonthlyGrossSalary.innerText * 12) + +h8.innerText}'>`
+    f14.innerHTML = `<input type='text' value='${(totalMonthlyGrossSalary.innerText * 12) + +h8.childNodes[0].value + grossSalary}'>`
     // f15.innerText = (+e9.innerText + Math.min(+h2.innerText, 200) + Math.min(+h3.innerText, 600) + +h4.innerText + +h5.innerText + +h6.innerText) * 12
     f15val = (+e9.childNodes[0].value + Math.min(+h2.childNodes[0].value, 200) + Math.min(+h3.childNodes[0].value, 600) + +h4.childNodes[0].value + +h5.childNodes[0].value + +h6.childNodes[0].value) * 12
     f15.innerHTML = `<input type='text' value='${f15val}'>`
+
+    f17.innerHTML = `<input type='text' value='${Math.max(Math.min(+f14.childNodes[0].value, 50000), 0) + deductionVal}'>`
+
+    f17.innerHTML = `<input type='text' value='${hra}'>`
 
     // f17.innerText = Math.max(Math.min(f14.innerText, 50000), 0)
     // f17.innerHTML = `<input type='text' value='${Math.max(Math.min(+f14.childNodes[0].value, 50000), 0)}'`
@@ -872,7 +1107,9 @@
     f19.innerHTML = `<input type='text' value='${f19val}'>`
 
     // f20.innerText = +f14.innerText - +f15.innerText - +f16.innerText - +f17.innerText - +f18.innerText - +f19.innerText
-    f20.innerHTML = `<input type='text' value='${+f14.childNodes[0].value - +f15.childNodes[0].value - +f16.childNodes[0].value - +f17.childNodes[0].value - +f18.childNodes[0].value - +f19.childNodes[0].value}'>`
+    f20.innerHTML = `<input type='text' value='${+f14.childNodes[0].value - +f15.childNodes[0].value - +f16.childNodes[0].value - +f17.childNodes[0].value - +f18.childNodes[0].value - +f19.childNodes[0].value + incomeSalary}'>`
+
+    f23.innerHTML = `<input type='text' value='${otherSources}'>`
 
 
     // f24.innerText = +f20.innerText + +f21.innerText + +f22.innerText + +f23.innerText
@@ -882,24 +1119,32 @@
     f22.innerHTML = `<input type='text' value='${rentValue}'>`
     h22.innerHTML = `<input type='text' value='${rentValue}'>`
 
+    f22b.innerHTML = `<input type='text' value='${incomeCapitalGain}'>`
+
     // f22c.innerText = dividendVal
     f22c.innerHTML = `<input type='text' value='${dividendVal}'>`
 
     // h14.innerText = (totalMonthlyGrossSalary.innerText * 12) + +h8.innerText
-    h14.innerHTML = `<input type='text' value='${totalMonthlyGrossSalary.innerText * 12 + +h8.childNodes[0].value}'>`
+    h14.innerHTML = `<input type='text' value='${totalMonthlyGrossSalary.innerText * 12 + +h8.childNodes[0].value + grossSalary}'>`
 
     // h15.innerText = +h6.innerText * 12
     h15.innerHTML = `<input type='text' value='${+h6.childNodes[0].value * 12}'>`
 
     // h17.innerText = Math.max(Math.min(h14.innerText, 50000), 0)
-    h17.innerHTML = `<input type='text' value='${Math.max(Math.min(+h14.childNodes[0].value, 50000), 0)}'>`
+    h17.innerHTML = `<input type='text' value='${Math.max(Math.min(+h14.childNodes[0].value, 50000), 0) + deductionVal}'>`
     // console.log(h17.childNodes[0].value)
 
+    h17b.innerHTML = `<input type='text' value='${hra}'>`
+
     // h20.innerText = +h14.innerText - +h15.innerText - +h17.innerText
-    h20.innerHTML = `<input type='text' value='${+h14.childNodes[0].value - +h15.childNodes[0].value - +h17.childNodes[0].value}'>`
+    h20.innerHTML = `<input type='text' value='${+h14.childNodes[0].value - +h15.childNodes[0].value - +h17.childNodes[0].value + incomeSalary}'>`
 
     // h22.innerText = +f22.innerText
     h22.innerHTML = `<input type='text' value='${+f22.childNodes[0].value}'>`
+
+    h23.innerHTML = `<input type='text' value='${otherSources}'>`
+
+    h22b.innerHTML = `<input type='text' value='${incomeCapitalGain}'>`
 
 
     // h22c.innerText = dividendVal
@@ -912,11 +1157,11 @@
 
     // h24.innerText = +h20.innerText + +h22.innerText + +h23.innerText
     // h24.innerHTML = `<input type='text' value='${+h20.childNodes[0].value + +h22.childNodes[0].value + +h23.childNodes[0].value}'>`
-    h24.innerText = +h20.childNodes[0].value + +h22.childNodes[0].value + +h23.childNodes[0].value
+    h24.innerText = +h20.childNodes[0].value + +h21.childNodes[0].value + +h22.childNodes[0].value
 
     // e40.innerText = +e26.innerText + +e27.innerText + +e28.innerText + +e29.innerText + +e30.innerText + +e31.innerText + +e32.innerText + +e33.innerText + +e34.innerText + +e35.innerText + +e36.innerText + +e37.innerText + +e38.innerText + +e39.innerText
     // e40.innerHTML = `<input type='text' value='${+e26.childNodes[0].value + +e27.childNodes[0].value + +e28.childNodes[0].value + +e29.childNodes[0].value + +e30.childNodes[0].value + +e31.childNodes[0].value + +e32.childNodes[0].value + +e33.childNodes[0].value + +e34.childNodes[0].value + +e35.childNodes[0].value + +e36.childNodes[0].value + +e37.childNodes[0].value + +e38.childNodes[0].value + +e39.childNodes[0].value}'>`
-    e40.innerText = +e26.childNodes[0].value + +e27.childNodes[0].value + +e28.childNodes[0].value + +e29.childNodes[0].value + +e30.childNodes[0].value + +e31.childNodes[0].value + +e32.childNodes[0].value + +e33.childNodes[0].value + +e34.childNodes[0].value + +e35.childNodes[0].value + +e36.childNodes[0].value + +e37.childNodes[0].value + +e38.childNodes[0].value + +e39.childNodes[0].value
+    e40.innerText = +e26.childNodes[0].value + +e27.childNodes[0].value + +e28.childNodes[0].value + +e29.childNodes[0].value + +e30.childNodes[0].value + +e31.childNodes[0].value + +e32.childNodes[0].value + +e33.childNodes[0].value + +e34.childNodes[0].value + +e35.childNodes[0].value + +e36.childNodes[0].value + +e37.childNodes[0].value + +e38.childNodes[0].value + +e39.childNodes[0].value + totalInvestment
 
     // f40.innerText = Math.min(+e40.innerText, 150000)
     // f40.innerHTML = `<input type='text' value='${Math.min(+e40.childNodes[0].value, 150000)}'>`
@@ -925,27 +1170,49 @@
     // f43.innerText = Math.min((+e2.innerText * 12) * 0.1, (+e10.innerText * 12))
     f43.innerHTML = `<input type='text' value='${Math.min((+e2.childNodes[0].value * 12) * 0.1, (+e10.childNodes[0].value * 12))}'>`
 
+    f46.innerHTML = `<input type='text' value='${sec80E}'>`
+
+    f50.innerHTML = `<input type='text' value='${sec80TTA}'>`
+
     //f52
-    f52.innerText = +f40.innerText + Math.min(+f41.childNodes[0].value, 75000) + Math.min(+f42.childNodes[0].value, 50000) + +f43.childNodes[0].value + Math.min(+f44.childNodes[0].value, 125000) + Math.min(+f45.childNodes[0].value, 125000) + +f46.childNodes[0].value + Math.min(+f47.childNodes[0].value, 50000) + Math.min(+f48.childNodes[0].value, 150000) + +f49.childNodes[0].value + Math.min(+f50.childNodes[0].value, 10000) + Math.min(+f51.childNodes[0].value, 125000)
+    f52.innerText = +f40.innerText + Math.min(+f41.childNodes[0].value, 75000) + Math.min(+f42.childNodes[0].value, 50000) + +f43.childNodes[0].value + Math.min(+f44.childNodes[0].value, 125000) + Math.min(+f45.childNodes[0].value, 125000) + +f46.childNodes[0].value + Math.min(+f47.childNodes[0].value, 50000) + Math.min(+f48.childNodes[0].value, 150000) + +f49.childNodes[0].value + Math.min(+f50.childNodes[0].value, 10000) + Math.min(+f51.childNodes[0].value, 125000 + totalDeductions)
 
 
 
 
 
     // f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
-    f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0)
+    f54.innerText = Math.max((+f24.innerText - +f52.innerText), 0) + totalIncome
+
+    f54a.innerHTML = `<input type='text' value='${incomeSpecialRate}'>`
+    f54b.innerHTML = `<input type='text' value='${aggregateIncome}'>`
+    f54c.innerHTML = `<input type='text' value='${taxNormalRate}'>`
+    f54d.innerHTML = `<input type='text' value='${taxSpecialRate}'>`
+
+    f55.innerHTML = `<input type='text' value='${incomeTax}'>`
 
     f57.innerHTML = `<input type='text' value='${+f55.childNodes[0].value - +f56.childNodes[0].value}'>`
 
     f59.innerHTML = `<input type='text' value='${+f57.childNodes[0].value + +f58.childNodes[0].value}'>`
 
+    h46.innerHTML = `<input type='text' value='${sec80E}'>`
+
+    h50.innerHTML = `<input type='text' value='${sec80TTA}'>`
+
 
     // h52.innerText = +h41.innerText + +h42.innerText + +h43.innerText + +h44.innerText + +h45.innerText + +h46.innerText + +h47.innerText + +h48.innerText + +h49.innerText + +h50.innerText + +h51.innerText
     // h52.innerHTML = `<input type='text' value='${+h41.childNodes[0].value + +h42.childNodes[0].value + +h43.childNodes[0].value + +h44.childNodes[0].value + +h45.childNodes[0].value + +h46.childNodes[0].value + +h47.childNodes[0].value + +h48.childNodes[0].value + +h49.childNodes[0].value + +h50.childNodes[0].value + +h51.childNodes[0].value}'>`
-    h52.innerText = +h41.childNodes[0].value + +h42.childNodes[0].value + +h43.childNodes[0].value + +h44.childNodes[0].value + +h45.childNodes[0].value + +h46.childNodes[0].value + +h47.childNodes[0].value + +h48.childNodes[0].value + +h49.childNodes[0].value + +h50.childNodes[0].value + +h51.childNodes[0].value
+    h52.innerText = +h41.childNodes[0].value + +h42.childNodes[0].value + +h43.childNodes[0].value + +h44.childNodes[0].value + +h45.childNodes[0].value + +h46.childNodes[0].value + +h47.childNodes[0].value + +h48.childNodes[0].value + +h49.childNodes[0].value + +h50.childNodes[0].value + +h51.childNodes[0].value + totalDeductions
 
     // h54.innerText = Math.max((+h24.innerText - +h52.innerText), 0)
-    h54.innerText = Math.max((+h24.innerText - +h52.innerText), 0)
+    h54.innerText = Math.max((+h24.innerText - +h52.innerText), 0) + totalIncome
+
+    h54a.innerHTML = `<input type='text' value='${incomeSpecialRate}'>`
+    h54b.innerHTML = `<input type='text' value='${aggregateIncome}'>`
+    h54c.innerHTML = `<input type='text' value='${taxNormalRate}'>`
+    h54d.innerHTML = `<input type='text' value='${taxSpecialRate}'>`
+
+    h55.innerHTML = `<input type='text' value='${incomeTax}'>`
 
     // h57.innerText = +h55.innerText - +h56.innerText
     h57.innerHTML = `<input type='text' value='${+h55.childNodes[0].value - +h56.childNodes[0].value}'>`
@@ -953,12 +1220,29 @@
     // h59.innerText = +h57.innerText + +h58.innerText
     h59.innerHTML = `<input type='text' value='${+h57.childNodes[0].value + +h58.childNodes[0].value}'>`
 
-    f60.innerHTML = `<input type='text' value='${+f59.childNodes[0].value * 0.4}'>`
-    h60.innerHTML = `<input type='text' value='${+h59.childNodes[0].value * 0.4}'>`
+    f60.innerHTML = `<input type='text' value='${+f59.childNodes[0].value * 0.4 + education}'>`
+    h60.innerHTML = `<input type='text' value='${+h59.childNodes[0].value * 0.4 + education}'>`
 
-    f61.innerText = +f59.childNodes[0].value + +f60.childNodes[0].value
-    h61.innerText = +h59.childNodes[0].value + +h60.childNodes[0].value
+    f61.innerText = +f59.childNodes[0].value + +f60.childNodes[0].value + grossTaxLiability
+    h61.innerText = +h59.childNodes[0].value + +h60.childNodes[0].value + grossTaxLiability
 
+    f62.innerHTML = `<input type='text' value='${advanceTax}'>`
+    h62.innerHTML = `<input type='text' value='${advanceTax}'>`
+
+    f63.innerHTML = `<input type='text' value='${tds}'>`
+    h63.innerHTML = `<input type='text' value='${tds}'>`
+
+    f64.innerHTML = `<input type='text' value='${selfAssessmentTax}'>`
+    h64.innerHTML = `<input type='text' value='${selfAssessmentTax}'>`
+
+    f65.innerHTML = `<input type='text' value='${totalTaxesPaid}'>`
+    h65.innerHTML = `<input type='text' value='${totalTaxesPaid}'>`
+
+    f66.innerHTML = `<input type='text' value='${balanceTaxPayable}'>`
+    h66.innerHTML = `<input type='text' value='${balanceTaxPayable}'>`
+
+    f67.innerHTML = `<input type='text' value='${refundDue}'>`
+    h67.innerHTML = `<input type='text' value='${refundDue}'>`
 
 
     const grossContainer = document.getElementById('gross-container')
