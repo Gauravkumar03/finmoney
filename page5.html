@@ -190,6 +190,10 @@
             background-color: green;
         }
 
+        #result {
+            display: block;
+        }
+
         /* .flex-container {
             display: flex;
             justify-content: space-around;
@@ -268,8 +272,10 @@
         <br>
         <button id="btn">Calculate HRA</button>
         <br>
+        <br>
         <p id="result"></p>
     </div>
+    
 
 
     <script type="module">
@@ -305,16 +311,17 @@
                 city = finalData.PartA_GEN1.PersonalInfo.Address.CityOrTownOrDistrict
             }
             if (city == 'NEW DELHI' || city == 'MUMBAI' || city == 'CHENNAI' || city == 'KOLKATA') {
-                document.getElementById('cityType').value = 'Y'
+                document.getElementById('cityType').value = 'Yes'
                 active = true
             } else {
-                document.getElementById('cityType').value = 'N'
+                document.getElementById('cityType').value = 'No'
                 active = false
             }
         } else {
             city = ''
             active = false
         }
+
 
 
 
@@ -329,9 +336,9 @@
 
             // Add logic for HRA calculation
             let isMetro;
-            if (cityType === "yes") {
+            if (cityType === "yes" || cityType === "Yes") {
                 isMetro = true;
-            } else if (cityType === "no") {
+            } else if (cityType === "no" || cityType === "No") {
                 isMetro = false;
             } else {
                 document.getElementById("result").innerHTML = "<span style='color: red;'>Invalid city type. Please enter 'Yes' or 'No'.</span>";
@@ -369,11 +376,11 @@
             if (active) {
                 toggle.classList.add('active')
                 // text.innerHTML = 'N'
-                document.getElementById('cityType').value = 'Y'
+                document.getElementById('cityType').value = 'Yes'
             } else {
                 toggle.classList.remove('active')
                 // text.innerHTML = 'FF'
-                document.getElementById('cityType').value = 'N'
+                document.getElementById('cityType').value = 'No'
             }
         }
     </script>
