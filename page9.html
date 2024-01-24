@@ -280,8 +280,17 @@
         const longTerm = document.getElementById('longTerm')
         const shortTerm = document.getElementById('shortTerm')
 
-        const longVal = data.ITR.ITR2.ScheduleCGFor23.ShortTermCapGainFor23.TotalSTCG
-        const shortVal = data.ITR.ITR2.ScheduleCGFor23.LongTermCapGain23.TotalLTCG
+        let longVal
+        let shortVal
+
+        if(data) {
+            longVal = data.ITR.ITR2.ScheduleCGFor23.ShortTermCapGainFor23.TotalSTCG
+            shortVal = data.ITR.ITR2.ScheduleCGFor23.LongTermCapGain23.TotalLTCG
+        } else {
+            longVal = 0
+            shortVal = 0
+        }
+        
 
 
         longTerm.innerHTML = `<p>Long Term Capital Gain</p>`

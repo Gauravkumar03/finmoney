@@ -201,8 +201,14 @@
     <script type="module">
         const jsonData = localStorage.getItem('jsonData')
         const data = JSON.parse(jsonData)
+        let value
 
-        const value = data.ITR.ITR2.PartB_TTI.ComputationOfTaxLiability.TaxPayableOnRebate
+        if(data) {
+            value = data.ITR.ITR2.PartB_TTI.ComputationOfTaxLiability.TaxPayableOnRebate
+        } else {
+            value = 0
+        }
+        
         document.getElementById('incomeTaxLiability').value = value
         const btn = document.getElementById('btn')
         btn.addEventListener('click', calculateCess)

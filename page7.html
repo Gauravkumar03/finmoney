@@ -254,29 +254,37 @@
 
         let finalData
 
-        if (data.ITR.ITR1 != undefined) {
-            finalData = data.ITR.ITR1
-        } else if (data.ITR.ITR2 != undefined) {
-            finalData = data.ITR.ITR2
-        } else if (data.ITR.ITR3 != undefined) {
-            finalData = data.ITR.ITR3
-        } else if (data.ITR.ITR4 != undefined) {
-            finalData = data.ITR.ITR4
-        } else if (data.ITR.ITR5 != undefined) {
-            finalData = data.ITR.ITR5
+        if (data) {
+            if (data.ITR.ITR1 != undefined) {
+                finalData = data.ITR.ITR1
+            } else if (data.ITR.ITR2 != undefined) {
+                finalData = data.ITR.ITR2
+            } else if (data.ITR.ITR3 != undefined) {
+                finalData = data.ITR.ITR3
+            } else if (data.ITR.ITR4 != undefined) {
+                finalData = data.ITR.ITR4
+            } else if (data.ITR.ITR5 != undefined) {
+                finalData = data.ITR.ITR5
+            }
         }
+
 
         let actual_rent = document.getElementById('actualRent')
 
         const container = document.getElementById('flex-container')
 
-        const arr = data.ITR.ITR2.ScheduleHP.PropertyDetails
-
-        if (arr.length > 8) {
-            container.style.flexWrap = 'wrap'
-        } else {
-            container.style.flexWrap = 'nowrap'
+        let arr
+        if (data) {
+            arr = data.ITR.ITR2.ScheduleHP.PropertyDetails
+            if (arr.length > 8) {
+                container.style.flexWrap = 'wrap'
+            } else {
+                container.style.flexWrap = 'nowrap'
+            }
         }
+
+
+
 
         const stateCodes = {
             "35": "Andaman and Nicobar Islands",
@@ -320,28 +328,32 @@
 
         let rent_sum = 0
 
-        for (let num of arr) {
-            const newDiv = document.createElement('div')
-            newDiv.setAttribute('class', 'flex-child')
-            // newDiv.setAttribute('class', 'grow')
-            const address = num.AddressDetailWithZipCode.AddrDetail
-            const city = num.AddressDetailWithZipCode.CityOrTownOrDistrict
-            const code = num.AddressDetailWithZipCode.StateCode
-            const codeStr = code.toString()
-            const state = stateCodes[codeStr]
-            const pincode = num.AddressDetailWithZipCode.PinCode
-            const rent = num.Rentdetails.AnnualLetableValue
-            const digit = num.HPSNo
-            newDiv.innerHTML = `<p>${digit} ${address}</p>`
-            newDiv.addEventListener('mouseenter', () => {
-                newDiv.innerHTML = `<p>${digit} ${address}, ${city}, ${state} ${pincode} <br /> Annual Rent: <span class='rent'>${rent}</span></p>`
-            })
-            newDiv.addEventListener('mouseleave', () => {
+        if (arr) {
+            for (let num of arr) {
+                const newDiv = document.createElement('div')
+                newDiv.setAttribute('class', 'flex-child')
+                // newDiv.setAttribute('class', 'grow')
+                const address = num.AddressDetailWithZipCode.AddrDetail
+                const city = num.AddressDetailWithZipCode.CityOrTownOrDistrict
+                const code = num.AddressDetailWithZipCode.StateCode
+                const codeStr = code.toString()
+                const state = stateCodes[codeStr]
+                const pincode = num.AddressDetailWithZipCode.PinCode
+                const rent = num.Rentdetails.AnnualLetableValue
+                const digit = num.HPSNo
                 newDiv.innerHTML = `<p>${digit} ${address}</p>`
-            })
-            container.append(newDiv)
-            rent_sum += rent 
+                newDiv.addEventListener('mouseenter', () => {
+                    newDiv.innerHTML = `<p>${digit} ${address}, ${city}, ${state} ${pincode} <br /> Annual Rent: <span class='rent'>${rent}</span></p>`
+                })
+                newDiv.addEventListener('mouseleave', () => {
+                    newDiv.innerHTML = `<p>${digit} ${address}</p>`
+                })
+                container.append(newDiv)
+                rent_sum += rent
+            }
         }
+
+
 
         actual_rent.value = rent_sum
         localStorage.setItem('rent_sum', JSON.stringify(rent_sum))
@@ -364,13 +376,13 @@
         }
 
         $(document).ready(function () {
-                $(document).on('mousemove', function (e) {
-                    $('#circularcursor').css({
-                        left: e.pageX,
-                        top: e.pageY
-                    });
-                })
-            });
+            $(document).on('mousemove', function (e) {
+                $('#circularcursor').css({
+                    left: e.pageX,
+                    top: e.pageY
+                });
+            })
+        });
     </script>
 </body>
 

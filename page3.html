@@ -208,29 +208,36 @@
         const data = JSON.parse(jsonData)
 
         let finalData
-
-        if (data.ITR.ITR1 != undefined) {
-            finalData = data.ITR.ITR1
-        } else if (data.ITR.ITR2 != undefined) {
-            finalData = data.ITR.ITR2
-        } else if (data.ITR.ITR3 != undefined) {
-            finalData = data.ITR.ITR3
-        } else if (data.ITR.ITR4 != undefined) {
-            finalData = data.ITR.ITR4
-        } else if (data.ITR.ITR5 != undefined) {
-            finalData = data.ITR.ITR5
+        if (data) {
+            if (data.ITR.ITR1 != undefined) {
+                finalData = data.ITR.ITR1
+            } else if (data.ITR.ITR2 != undefined) {
+                finalData = data.ITR.ITR2
+            } else if (data.ITR.ITR3 != undefined) {
+                finalData = data.ITR.ITR3
+            } else if (data.ITR.ITR4 != undefined) {
+                finalData = data.ITR.ITR4
+            } else if (data.ITR.ITR5 != undefined) {
+                finalData = data.ITR.ITR5
+            }
         }
+
 
         // const incomeVal = data.ITR.ITR2['PartB-TI'].GrossTotalIncome
         let incomeVal
 
-        if (data.ITR.ITR1 != undefined) {
-            incomeVal = finalData.ITR1_IncomeDeductions.GrossTotIncome
-        } else if (data.ITR.ITR4 != undefined) {
-            incomeVal = finalData.IncomeDeductions.GrossTotIncome
+        if (data) {
+            if (data.ITR.ITR1 != undefined) {
+                incomeVal = finalData.ITR1_IncomeDeductions.GrossTotIncome
+            } else if (data.ITR.ITR4 != undefined) {
+                incomeVal = finalData.IncomeDeductions.GrossTotIncome
+            } else {
+                incomeVal = finalData['PartB-TI'].GrossTotalIncome
+            }
         } else {
-            incomeVal = finalData['PartB-TI'].GrossTotalIncome
+            incomeVal = 0
         }
+
 
 
         const btn = document.getElementById('btn')
@@ -256,13 +263,13 @@
         }
 
         $(document).ready(function () {
-                $(document).on('mousemove', function (e) {
-                    $('#circularcursor').css({
-                        left: e.pageX,
-                        top: e.pageY
-                    });
-                })
-            });
+            $(document).on('mousemove', function (e) {
+                $('#circularcursor').css({
+                    left: e.pageX,
+                    top: e.pageY
+                });
+            })
+        });
     </script>
 </body>
 
