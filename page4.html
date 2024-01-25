@@ -237,6 +237,8 @@
         if (data) {
             if (data.ITR.ITR1 != undefined || data.ITR.ITR4 != undefined) {
                 dob = finalData.PersonalInfo.DOB
+            } else if (data.ITR.ITR5 != undefined) {
+                dob = ''
             } else {
                 dob = finalData.PartA_GEN1.PersonalInfo.DOB
             }

@@ -305,6 +305,8 @@
         if (data) {
             if (data.ITR.ITR1 != undefined || data.ITR.ITR4 != undefined) {
                 city = finalData.PersonalInfo.Address.CityOrTownOrDistrict
+            } else if (data.ITR.ITR5 != undefined) {
+                city = finalData.PartA_GEN1.OrgFirmInfo.Address.CityOrTownOrDistrict
             } else {
                 city = finalData.PartA_GEN1.PersonalInfo.Address.CityOrTownOrDistrict
             }
