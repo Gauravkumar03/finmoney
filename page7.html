@@ -240,6 +240,8 @@
         <label for="interestDeduction">Enter the interest on borrowed capital:</label>
         <input type="number" id="interestDeduction" placeholder="Enter interest on borrowed capital">
         <br>
+        <label for="thirtyDeduction">30% Deduction:</label>
+        <input type="number" id="thirtyDeduction" placeholder="Enter deduction">
         <button id="btn">Calculate Income</button>
         <br>
         <p id="result"></p>
@@ -335,11 +337,16 @@
                 const codeStr = code.toString()
                 const state = stateCodes[codeStr]
                 const pincode = num.AddressDetailWithZipCode.PinCode
-                const rent = num.Rentdetails.AnnualLetableValue
+                const rent = num.Rentdetails.IncomeOfHP
                 const digit = num.HPSNo
+                const actualRent = num.Rentdetails.AnnualLetableValue 
+                const localTaxes = num.Rentdetails.LocalTaxes 
+                const thirtyDeduction = num.Rentdetails.ThirtyPercentOfBalance 
+                const incomeOnHp = num.Rentdetails.IncomeOfHP
+
                 newDiv.innerHTML = `<p>${digit} ${address}</p>`
                 newDiv.addEventListener('mouseenter', () => {
-                    newDiv.innerHTML = `<p>${digit} ${address}, ${city}, ${state} ${pincode} <br /> Annual Rent: <span class='rent'>${rent}</span></p>`
+                    newDiv.innerHTML = `<p>${digit} <br /> Municipal Tax Paid: ${localTaxes} <br /> 30% of deduction: ${thirtyDeduction} <br /> Annual Rent: <span class='rent'>${rent}</span></p>`
                 })
                 newDiv.addEventListener('mouseleave', () => {
                     newDiv.innerHTML = `<p>${digit} ${address}</p>`

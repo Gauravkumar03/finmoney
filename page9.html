@@ -234,6 +234,9 @@
         <label for="costOfAcquisition">Enter the cost of acquisition of asset:</label>
         <input type="number" id="costOfAcquisition" placeholder="Enter cost of acquisition">
         <br>
+        <label for="costOfAcquisitionIndexation">Aquisition cost of Indexation:</label>
+        <input type="number" id="costOfAcquisitionIndexation" placeholder="Enter aquisition cost of indexation">
+        <br>
         <label for="sellingPrice">Enter the selling price of the asset:</label>
         <input type="number" id="sellingPrice" placeholder="Enter selling price">
         <br>
@@ -243,8 +246,20 @@
         <label for="saleYear">Enter the sale year of the asset (in format YYYY):</label>
         <input type="number" id="saleYear" placeholder="Enter sale year">
         <br>
+        <label for="expenseOnSale">Expense on Sale:</label>
+        <input type="number" id="expenseOnSale" placeholder="Enter expense on Sale">
+        <br>
         <label for="costOfImprovements">Enter the cost of any improvements made to the asset:</label>
         <input type="number" id="costOfImprovements" placeholder="Enter cost of improvements">
+        <br>
+        <label for="dateOfImprovement">Enter the date of Improvement:</label>
+        <input type="number" id="dateOfImprovement" placeholder="Enter date of Improvement">
+        <br>
+        <label for="improvementCostOfIndexation">Improvement Cost of Indexation:</label>
+        <input type="number" id="improvementCostOfIndexation" placeholder="Enter improvement cost">
+        <br>
+        <label for="totalDeduction">Total Deduction:</label>
+        <input type="number" id="totalDeduction" placeholder="Enter total deduction">
         <br>
         <button id="capitalGainsBtn">Calculate Capital Gains</button>
         <br>
@@ -286,8 +301,8 @@
             longVal = 0
             shortVal = 0
         } else if (data.ITR.ITR2 != undefined) {
-            longVal = data.ITR.ITR2.ScheduleCGFor23.ShortTermCapGainFor23.TotalSTCG
-            shortVal = data.ITR.ITR2.ScheduleCGFor23.LongTermCapGain23.TotalLTCG
+            longVal = data.ITR.ITR2.ScheduleCGFor23.LongTermCapGain23.TotalLTCG
+            shortVal = data.ITR.ITR2.ScheduleCGFor23.ShortTermCapGainFor23.TotalSTCG
         } else {
             longVal = 0
             shortVal = 0 
