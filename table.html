@@ -798,8 +798,8 @@
             grossSalary = data.ITR.ITR2.ScheduleS.TotalGrossSalary
             deductionVal = data.ITR.ITR2.ScheduleS.DeductionUnderSection16ia
             incomeSalary = data.ITR.ITR2.ScheduleS.TotIncUnderHeadSalaries
-            hra = data.ITR.ITR2.ScheduleS.AllwncExemptUs10.AllwncExemptUs10Dtls[0].SalOthAmount
-            // hra = 0
+            // hra = data.ITR.ITR2.ScheduleS.AllwncExemptUs10.AllwncExemptUs10Dtls[0].SalOthAmount
+            hra = 0
             professionalTax = data.ITR.ITR2.ScheduleS.ProfessionalTaxUs16iii
             otherSources = data.ITR.ITR2.ScheduleOS.IncChargeable
             incomeCapitalGain = data.ITR.ITR2.ScheduleCGFor23.TotScheduleCGFor23
@@ -827,7 +827,9 @@
             netAgrIncome = data.ITR.ITR2['PartB-TI'].NetAgricultureIncomeOrOtherIncomeForRate
             deemedIncome = data.ITR.ITR2['PartB-TI'].DeemedIncomeUs115JC
             sec10exemp = data.ITR.ITR2.ScheduleS.AllwncExtentExemptUs10
-            incomeFromHouseProperty = data.ITR.ITR2.ScheduleHP.TotalIncomeChargeableUnHP
+            // incomeFromHouseProperty = data.ITR.ITR2.ScheduleHP.TotalIncomeChargeableUnHP 
+            incomeFromHouseProperty = data.ITR.ITR2.ScheduleHP == undefined ? 0 : data.ITR.ITR2.ScheduleHP.TotalIncomeChargeableUnHP
+
             netAgricultureIncome = data.ITR.ITR2['PartB-TI'].NetAgricultureIncomeOrOtherIncomeForRate
             stdDeduction = data.ITR.ITR2.ScheduleS.DeductionUnderSection16ia
             section80c = 0
