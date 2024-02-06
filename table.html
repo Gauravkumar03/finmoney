@@ -435,9 +435,9 @@
                 <th id="h24"></th>
             </tr>
             <tr>
-                <td style="width:50%" colspan="2">Exempt Income</td>
-                <td id="f25"><input type="text" value="0"></td>
-                <td id="h25"><input type="text" value="0"></td>
+                <th style="width:50%" colspan="2">Exempt Income</th>
+                <th id="f25">0</th>
+                <th id="h25">0</th>
             </tr>
             <tr>
                 <td style="width:50%" colspan="2">Net Agriculture Income</td>
@@ -784,6 +784,7 @@
     let section80u
     let section80tta
     let totalChapViaDeductions
+    let others
     if (data) {
         if (data.ITR.ITR2 != undefined) {
             dividendVal = data.ITR.ITR2.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
@@ -816,7 +817,7 @@
             selfAssessmentTax = data.ITR.ITR2['PartB_TTI'].TaxPaid.TaxesPaid.SelfAssessmentTax
             totalTaxesPaid = data.ITR.ITR2['PartB_TTI'].TaxPaid.TaxesPaid.TotalTaxesPaid
             balanceTaxPayable = data.ITR.ITR2['PartB_TTI'].TaxPaid.BalTaxPayable
-            refundDue = data.ITR.ITR2['PartB_TTI'].Refund.RefundDue
+            refundDue = data.ITR.ITR2['PartB_TTI'].Refund.
             balanceAfterLoss = data.ITR.ITR2['PartB-TI'].BalanceAfterSetoffLosses
             netAgrIncome = data.ITR.ITR2['PartB-TI'].NetAgricultureIncomeOrOtherIncomeForRate
             deemedIncome = data.ITR.ITR2['PartB-TI'].DeemedIncomeUs115JC
@@ -836,14 +837,17 @@
             section80g = 0
             section80u = 0
             totalChapViaDeductions = 0
+            
         } else if (data.ITR.ITR1 != undefined) {
             stdDeduction = data.ITR.ITR1.ITR1_IncomeDeductions.DeductionUs16
+            console.log(stdDeduction, 'this is stddeduction')
             dividendVal = 0
-            grossSalary = 0
+            grossSalary = data.ITR.ITR1.ITR1_IncomeDeductions.GrossSalary
             deductionVal = 0
             incomeSalary = data.ITR.ITR1.ITR1_IncomeDeductions.IncomeFromSal
             hra = 0
-            professionalTax = 0
+            professionalTax = data.ITR.ITR1.ITR1_IncomeDeductions.ProfessionalTaxUs16iii != undefined ? data.ITR.ITR1.ITR1_IncomeDeductions.ProfessionalTaxUs16iii : 0
+            console.log(professionalTax, 'this is professional')
             otherSources = 0
             incomeCapitalGain = 0
             totalInvestment = 0
@@ -857,6 +861,7 @@
             taxSpecialRate = 0
             incomeTax = data.ITR.ITR1.ITR1_TaxComputation.TotalTaxPayable
             rebate = data.ITR.ITR1.ITR1_TaxComputation.Rebate87A
+            console.log(rebate, 'this is rebate value')
             rebateOnAgri = 0
             education = data.ITR.ITR1.ITR1_TaxComputation.EducationCess
             grossTaxLiability = data.ITR.ITR1.ITR1_TaxComputation.NetTaxLiability
@@ -866,7 +871,7 @@
             selfAssessmentTax = data.ITR.ITR1.TaxPaid.TaxesPaid.SelfAssessmentTax
             totalTaxesPaid = data.ITR.ITR1.TaxPaid.TaxesPaid.TotalTaxesPaid
             balanceTaxPayable = 0
-            refundDue = 0
+            refundDue = data.ITR.ITR1.Refund.RefundDue
             balanceAfterLoss = 0
             netAgrIncome = 0
             deemedIncome = 0
@@ -884,7 +889,7 @@
             section80g = data.ITR.ITR1.ITR1_IncomeDeductions.DeductUndChapVIA.Section80G
             section80u = data.ITR.ITR1.ITR1_IncomeDeductions.DeductUndChapVIA.Section80U
             section80tta = data.ITR.ITR1.ITR1_IncomeDeductions.DeductUndChapVIA.Section80TTA
-            console.log(incomeTax)
+            console.log(section80d, 'this is section80d')
         } else if (data.ITR.ITR3 != undefined) {
             dividendVal = data.ITR.ITR3.ScheduleOS.DividendIncUs115BBDA.DateRange.Upto15Of6
         }

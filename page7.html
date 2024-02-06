@@ -346,7 +346,7 @@
 
                 newDiv.innerHTML = `<p>${digit} ${address}</p>`
                 newDiv.addEventListener('mouseenter', () => {
-                    newDiv.innerHTML = `<p>${digit} <br /> Municipal Tax Paid: ${localTaxes} <br /> 30% of deduction: ${thirtyDeduction} <br /> Annual Rent: <span class='rent'>${rent}</span></p>`
+                    newDiv.innerHTML = `<p>Annual Rent: <span class='rent'>${actualRent}</span><br />${digit} <br /> Municipal Tax Paid: ${localTaxes} <br /> 30% of deduction: ${thirtyDeduction} </p>`
                 })
                 newDiv.addEventListener('mouseleave', () => {
                     newDiv.innerHTML = `<p>${digit} ${address}</p>`
