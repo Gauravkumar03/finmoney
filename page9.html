@@ -296,8 +296,11 @@
 
         let longVal
         let shortVal
+        let saleIndex
+        let aquisitionIndex
+        let purchaseCostOfIndexation
 
-        if(data?.ITR?.ITR1 != undefined) {
+        if (data?.ITR?.ITR1 != undefined) {
             longVal = 0
             shortVal = 0
         } else if (data.ITR.ITR2 != undefined) {
@@ -305,9 +308,9 @@
             shortVal = data.ITR.ITR2.ScheduleCGFor23.ShortTermCapGainFor23.TotalSTCG
         } else {
             longVal = 0
-            shortVal = 0 
+            shortVal = 0
         }
-        
+
 
 
         longTerm.innerHTML = `<p>Long Term Capital Gain</p>`
@@ -344,24 +347,52 @@
             const purchaseYear = parseInt(document.getElementById("purchaseYear").value);
             const saleYear = parseInt(document.getElementById("saleYear").value);
             const costOfImprovements = parseFloat(document.getElementById("costOfImprovements").value);
+            const dateOfImprovement = parseFloat(document.getElementById("dateOfImprovement").value);
+            let costOfAcquisitionIndexation = document.getElementById("costOfAcquisitionIndexation")
+            let improvementCostOfIndexation = document.getElementById("improvementCostOfIndexation")
+            let expenseOnSale = document.getElementById("expenseOnSale")
+            let totalDeduction = document.getElementById("totalDeduction")
 
             const holdingPeriod = saleYear - purchaseYear;
 
-            if (holdingPeriod >= 24) {
-                const indexationTable = {
-                    2001: 100, 2002: 105, 2003: 109, 2004: 113, 2005: 117, 2006: 122, 2007: 129, 2008: 137,
-                    2009: 148, 2010: 167, 2011: 184, 2012: 200, 2013: 220, 2014: 240, 2015: 254, 2016: 264,
-                    2017: 272, 2018: 280, 2019: 289, 2020: 301, 2021: 317, 2022: 331
-                };
+            // if (holdingPeriod >= 24) {
+            //     const indexationTable = {
+            //         2001: 100, 2002: 105, 2003: 109, 2004: 113, 2005: 117, 2006: 122, 2007: 129, 2008: 137,
+            //         2009: 148, 2010: 167, 2011: 184, 2012: 200, 2013: 220, 2014: 240, 2015: 254, 2016: 264,
+            //         2017: 272, 2018: 280, 2019: 289, 2020: 301, 2021: 317, 2022: 331
+            //     };
 
-                const indexedCost = costOfAcquisition * (indexationTable[saleYear] / indexationTable[purchaseYear]) + costOfImprovements;
-                const longTermCapitalGains = sellingPrice - indexedCost;
+            //     const indexedCost = costOfAcquisition * (indexationTable[saleYear] / indexationTable[purchaseYear]) + costOfImprovements;
+            //     const longTermCapitalGains = sellingPrice - indexedCost;
 
-                document.getElementById("capitalGainsResult").innerHTML = `Indexed cost: ${indexedCost.toFixed(2)}<br>Long-term capital gains: ${longTermCapitalGains.toFixed(2)}`;
-            } else {
-                const shortTermCapitalGains = sellingPrice - (costOfAcquisition + costOfImprovements);
-                document.getElementById("capitalGainsResult").innerHTML = `Short-term capital gains: ${shortTermCapitalGains.toFixed(2)}`;
-            }
+            //     document.getElementById("capitalGainsResult").innerHTML = `Indexed cost: ${indexedCost.toFixed(2)}<br>Long-term capital gains: ${longTermCapitalGains.toFixed(2)}`;
+            // } else {
+            //     const shortTermCapitalGains = sellingPrice - (costOfAcquisition + costOfImprovements);
+            //     document.getElementById("capitalGainsResult").innerHTML = `Short-term capital gains: ${shortTermCapitalGains.toFixed(2)}`;
+            // }
+            const indexationTable = {
+                2001: 100, 2002: 105, 2003: 109, 2004: 113, 2005: 117, 2006: 122, 2007: 129, 2008: 137,
+                2009: 148, 2010: 167, 2011: 184, 2012: 200, 2013: 220, 2014: 240, 2015: 254, 2016: 264,
+                2017: 272, 2018: 280, 2019: 289, 2020: 301, 2021: 317, 2022: 331
+            };
+
+            let costVal = costOfAcquisition * indexationTable[saleYear] / indexationTable[purchaseYear]
+            let improvementVal = costOfImprovements * indexationTable[saleYear] / indexationTable[dateOfImprovement]
+            let totalDeductionVal = costVal + improvementVal + expenseOnSale.value 
+            let captitalGainVal = sellingPrice - totalDeductionVal
+            
+
+            costOfAcquisitionIndexation.value = costVal
+
+            improvementCostOfIndexation.value = improvementVal
+
+            totalDeduction.value = totalDeductionVal
+
+            document.getElementById("capitalGainsResult").innerHTML = `Capital Gains: ${captitalGainVal}`
+
+
+
+
         }
 
         function calculateInterestIncome() {
@@ -381,13 +412,13 @@
         }
 
         $(document).ready(function () {
-                $(document).on('mousemove', function (e) {
-                    $('#circularcursor').css({
-                        left: e.pageX,
-                        top: e.pageY
-                    });
-                })
-            });
+            $(document).on('mousemove', function (e) {
+                $('#circularcursor').css({
+                    left: e.pageX,
+                    top: e.pageY
+                });
+            })
+        });
     </script>
 </body>
 

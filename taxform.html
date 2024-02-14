@@ -570,6 +570,162 @@ select{
       </div>
     </div>
 
+  </div>
+
+  <div class="container">
+    <div class="form-container1">
+      <div class="form-group" style="width: 55px;">
+        <label for="regime">Regime:</label>
+        <select id="regime" onchange="toggleOptions(); calculateValues()" class="p-2 border rounded">
+          <option value="new">New</option>
+          <option value="old">Old</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="old-options" style="width: 55px;">
+        <label for="old-options-select">Age Category</label>
+        <select id="old-options-select" class="p-2 border rounded">
+          <option value="normal">Normal</option>
+          <option value="senior">Senior</option>
+          <option value="super-senior">Super Senior</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-container">
+
+      <div class="form-group">
+        <label for="SGP" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Salary Gross
+          Pay:</label>
+        <input type="number" id="SGP" name="SGP" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="DI" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Dividend
+          Income:</label>
+        <input type="number" id="DI" name="DI" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group" style="padding-top: 10px;">
+        <label for="TAX" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Total Taxable
+          Income:</label>
+        <input type="number" id="TAX" name="TAX" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="TL" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Tax Liability
+          (with cess):</label>
+        <input type="number" id="TL" name="TL" onchange="calculateValues()">
+      </div>
+
+
+      <div class="form-group">
+        <label for="SD" id="gratuityLabel">Standard Deduction:</label>
+        <input type="number" id="SD" name="SD" value="50000" readonly placeholder="50000" onchange="toggleOptions"
+          style="color: #000000;">
+      </div>
+
+
+      <div class="form-group">
+        <label for="80C" id="gratuityLabel">80CCD:</label>
+        <input type="number" id="80C" name="80C" onchange="calculateValues()" onchange="toggleOptions"
+          style="color: #000000;">
+      </div>
+
+      <div class="form-group">
+        <label id="gratuityLabel" for="GR" class="editable-label" ondblclick="makeLabelEditable(this)">GRATUITY:</label>
+        <input type="number" id="GR" name="GR" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="LE" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Leave
+          Enchasement:</label>
+        <input type="number" id="LE" name="LE" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="INTERNET" id="gratuityLabel" class="editable-label"
+          ondblclick="makeLabelEditable(this)">INTERNET:</label>
+        <input type="number" id="INTERNET" name="INTERNET" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="OtherA" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Other
+          Allowance:</label>
+        <input type="number" id="OtherA" name="OtherA" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="HRA" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">HRA/Sec
+          10:</label>
+        <input type="number" id="HRA" name="HRA" onchange="calculateValues()">
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="PT" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Prof Tax:</label>
+        <input type="number" id="PT" name="PT" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="80G-Cap" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">80G
+          Cap:</label>
+        <input type="number" id="80G-Cap" name="80G-Cap" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="E80G" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">E80G:</label>
+        <input type="number" id="E80G" name="E80G" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="TIAC" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Total income
+          after Charity contribution:</label>
+        <input type="number" id="TIAC" name="TIAC" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group">
+        <label for="TLAC" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Tax Liability
+          after Charity contribution(with cess):</label>
+        <input type="number" id="TLAC" name="TLAC" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group" style="padding-top: 33px;">
+        <label for="TS" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Tax Save:</label>
+        <input type="number" id="TS" name="TS" onchange="calculateValues()">
+      </div>
+
+      <div class="form-group" style="padding-top: 33px;">
+        <label for="TD" id="gratuityLabel" class="editable-label" ondblclick="makeLabelEditable(this)">Tax
+          Deductions:</label>
+        <input type="number" id="TD" name="TD" onchange="calculateValues()">
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button class="tax-button">Tax Save under Old Regime</button>
+      <div class="tax-save-display" id="old-regime-tax-save-display"></div>
+
+      <button class="tax-button">Tax Save under New Regime</button>
+      <div class="tax-save-display" id="new-regime-tax-save-display"></div>
+
+      <button class="tax-button" style="border-color: #ffffff; background-color: #204c5a; color: #ffffff;">TDS till
+        date</button>
+      <div class="tax-save-display" id="tds"></div>
+
+      <button class="tax-button" style="border-color: #ffffff; background-color: #204c5a; color: #ffffff;">Expected Full
+        TDS</button>
+      <div class="tax-save-display" id="eft"></div>
+
+      <button class="tax-button" style="border-color: #ffffff; background-color: #204c5a; color: #ffffff;">Expected
+        Refund</button>
+      <div class="tax-save-display" id="er">
+      </div>
+    </div>
+
+  </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -772,20 +928,6 @@ select{
 
 
         document.getElementById("TS").value = TS.toFixed(2);
-
-
-        // TD
-        // var TD = (parseFloat(document.getElementById("80C").value)  || (regime === "old" ? 0 : 0))+
-        //     (parseFloat(document.getElementById("GR").value) || (regime === "old" ? 0 : 0))+
-        //     (parseFloat(document.getElementById("LE").value) || (regime === "old" ? 0 : 0))+
-        //     (parseFloat(document.getElementById("INTERNET").value) ||(regime === "old" ? 0 : 0))+
-        //     (parseFloat(document.getElementById("OtherA").value) || (regime === "old" ? 0 : 0))+
-        //     (parseFloat(document.getElementById("HRA").value) || (regime === "old" ? 0 : 0))+
-        //     (parseFloat(document.getElementById("SD").value) || (regime === "old" ? 0 : 0))+
-        //     (parseFloat(document.getElementById("PT").value) || (regime === "old" ? 0 : 0))+
-        //     E80G;
-
-        // document.getElementById("TD").value = TD;
 
 
         displayTaxSaveUnderOldRegime();
