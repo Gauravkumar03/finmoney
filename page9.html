@@ -299,17 +299,22 @@
         let saleIndex
         let aquisitionIndex
         let purchaseCostOfIndexation
-
-        if (data?.ITR?.ITR1 != undefined) {
-            longVal = 0
-            shortVal = 0
-        } else if (data.ITR.ITR2 != undefined) {
-            longVal = data.ITR.ITR2.ScheduleCGFor23.LongTermCapGain23.TotalLTCG
-            shortVal = data.ITR.ITR2.ScheduleCGFor23.ShortTermCapGainFor23.TotalSTCG
+        if (data) {
+            if (data?.ITR?.ITR1 != undefined) {
+                longVal = 0
+                shortVal = 0
+            } else if (data?.ITR?.ITR2 != undefined) {
+                longVal = data.ITR.ITR2.ScheduleCGFor23.LongTermCapGain23.TotalLTCG
+                shortVal = data.ITR.ITR2.ScheduleCGFor23.ShortTermCapGainFor23.TotalSTCG
+            } else {
+                longVal = 0
+                shortVal = 0
+            }
         } else {
             longVal = 0
             shortVal = 0
         }
+
 
 
 
@@ -378,9 +383,9 @@
 
             let costVal = costOfAcquisition * indexationTable[saleYear] / indexationTable[purchaseYear]
             let improvementVal = costOfImprovements * indexationTable[saleYear] / indexationTable[dateOfImprovement]
-            let totalDeductionVal = costVal + improvementVal + expenseOnSale.value 
+            let totalDeductionVal = costVal + improvementVal + expenseOnSale.value
             let captitalGainVal = sellingPrice - totalDeductionVal
-            
+
 
             costOfAcquisitionIndexation.value = costVal
 
