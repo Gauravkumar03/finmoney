@@ -291,8 +291,7 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="carousel-container">
-                        <label for="expenseOnSale">Name of The Improvement:</label>
-                        <input type="text" placeholder="Enter name of the Improvement">
+                        <h4>Name of The Improvement:</h4>
                         <br>
                         <label for="costOfImprovements">Enter the cost of any improvements made to the asset:</label>
                         <input type="number" id="costOfImprovements1" placeholder="Enter cost of improvements">
@@ -303,7 +302,7 @@
                         <label for="improvementCostOfIndexation">Improvement Cost of Indexation:</label>
                         <input type="number" id="improvementCostOfIndexation1" placeholder="Enter improvement cost">
                         <label for="totalDeduction">Total Improvement Cost Of Indexation</label>
-                        <input type="number" id="totalImprovement" placeholder="">
+                        <input type="number" class="totalImprovement" placeholder="">
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -319,7 +318,7 @@
                         <label for="improvementCostOfIndexation">Improvement Cost of Indexation:</label>
                         <input type="number" id="improvementCostOfIndexation2" placeholder="Enter improvement cost">
                         <label for="totalDeduction">Total Improvement Cost Of Indexation</label>
-                        <input type="number" id="totalImprovement" placeholder="">
+                        <input type="number" class="totalImprovement" placeholder="">
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -336,7 +335,7 @@
                         <input type="number" id="improvementCostOfIndexation3" placeholder="Enter improvement cost">
                         <br>
                         <label for="totalDeduction">Total Improvement Cost Of Indexation</label>
-                        <input type="number" id="totalImprovement" placeholder="">
+                        <input type="number" class="totalImprovement" placeholder="">
                     </div>
 
                 </div>
@@ -451,7 +450,9 @@
         const sellingPrice = document.getElementById("sellingPrice");
         const purchaseYear = document.getElementById("purchaseYear");
         const saleYear = document.getElementById("saleYear")
-        const totalImprovement = document.getElementById('totalImprovement')
+        const totalImprovement = document.getElementsByClassName("totalImprovement")
+
+
 
         const indexationTable = {
             // 2001: 100, 2002: 105, 2003: 109, 2004: 113, 2005: 117, 2006: 122, 2007: 129, 2008: 137,
@@ -479,6 +480,7 @@
             '2020-04': 301, '2020-05': 301, '2020-06': 301, '2020-07': 301, '2020-08': 301, '2020-09': 301, '2020-10': 301, '2020-11': 301, '2020-12': 301, '2021-01': 301, '2021-02': 301, '2021-03': 301,
             '2021-04': 317, '2021-05': 317, '2021-06': 317, '2021-07': 317, '2021-08': 317, '2021-09': 317, '2021-10': 317, '2021-11': 317, '2021-12': 317, '2022-01': 317, '2022-02': 317, '2022-03': 317,
             '2022-04': 331, '2022-05': 331, '2022-06': 331, '2022-07': 331, '2022-08': 331, '2022-09': 331, '2022-10': 331, '2022-11': 331, '2022-12': 331, '2023-01': 331, '2023-02': 331, '2023-03': 331,
+            '2023-04': 348, '2023-05': 348, '2023-06': 348, '2023-07': 348, '2023-08': 348, '2023-09': 348, '2023-10': 348, '2023-11': 348, '2023-12': 348, '2024-01': 348, '2024-02': 348, '2024-03': 348,
         };
 
         doi1.addEventListener('change', fun1)
@@ -490,17 +492,23 @@
             const dateOfImprovement1 = document.getElementById("dateOfImprovement1").value;
             let improvementVal1 = costOfImprovements1 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement1]
             improvementCostOfIndexation1.value = improvementVal1
-            totalImprovementVal += improvementVal1
-            totalImprovement.value = totalImprovementVal
+            totalImprovementVal += +improvementVal1
+            
+            for (let item of totalImprovement) {
+                item.value = +totalImprovementVal
+            }
         }
 
         function fun2() {
             const costOfImprovements2 = parseFloat(document.getElementById("costOfImprovements2").value);
             const dateOfImprovement2 = document.getElementById("dateOfImprovement2").value;
             let improvementVal2 = costOfImprovements2 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement2]
-            improvementCostOfIndexation2.value = improvementVal2
+            improvementCostOfIndexation2.value = +improvementVal2
             totalImprovementVal += improvementVal2
-            totalImprovement.value = totalImprovementVal
+            
+            for (let item of totalImprovement) {
+                item.value = +totalImprovementVal
+            }
         }
 
         function fun3() {
@@ -508,8 +516,11 @@
             const dateOfImprovement3 = document.getElementById("dateOfImprovement2").value;
             let improvementVal3 = costOfImprovements3 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement3]
             improvementCostOfIndexation3.value = improvementVal3
-            totalImprovementVal += improvementVal3
-            totalImprovement.value = totalImprovementVal
+            totalImprovementVal += +improvementVal3
+            
+            for (let item of totalImprovement) {
+                item.value = +totalImprovementVal
+            }
         }
 
         gainsBtn.addEventListener('click', calculateCapitalGains)
@@ -551,6 +562,8 @@
             totalDeduction.value = totalDeductionVal
 
             document.getElementById("capitalGainsResult").innerHTML = `Capital Gains: ${captitalGainVal}`
+
+            
 
         }
 
