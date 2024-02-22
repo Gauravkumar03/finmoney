@@ -491,11 +491,11 @@
             const costOfImprovements1 = parseFloat(document.getElementById("costOfImprovements1").value);
             const dateOfImprovement1 = document.getElementById("dateOfImprovement1").value;
             let improvementVal1 = costOfImprovements1 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement1]
-            improvementCostOfIndexation1.value = improvementVal1
-            totalImprovementVal += +improvementVal1
+            improvementCostOfIndexation1.value = +improvementVal1.toFixed(2)
+            totalImprovementVal += +improvementVal1.toFixed(2)
             
             for (let item of totalImprovement) {
-                item.value = +totalImprovementVal
+                item.value = +totalImprovementVal.toFixed(2)
             }
         }
 
@@ -503,11 +503,11 @@
             const costOfImprovements2 = parseFloat(document.getElementById("costOfImprovements2").value);
             const dateOfImprovement2 = document.getElementById("dateOfImprovement2").value;
             let improvementVal2 = costOfImprovements2 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement2]
-            improvementCostOfIndexation2.value = +improvementVal2
-            totalImprovementVal += improvementVal2
+            improvementCostOfIndexation2.value = +improvementVal2.toFixed(2)
+            totalImprovementVal += +improvementVal2.toFixed(2)
             
             for (let item of totalImprovement) {
-                item.value = +totalImprovementVal
+                item.value = +totalImprovementVal.toFixed(2)
             }
         }
 
@@ -515,11 +515,11 @@
             const costOfImprovements3 = parseFloat(document.getElementById("costOfImprovements2").value);
             const dateOfImprovement3 = document.getElementById("dateOfImprovement2").value;
             let improvementVal3 = costOfImprovements3 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement3]
-            improvementCostOfIndexation3.value = improvementVal3
-            totalImprovementVal += +improvementVal3
+            improvementCostOfIndexation3.value = +improvementVal3.toFixed(2)
+            totalImprovementVal += +improvementVal3.toFixed(2)
             
             for (let item of totalImprovement) {
-                item.value = +totalImprovementVal
+                item.value = +totalImprovementVal.toFixed(2)
             }
         }
 
@@ -553,15 +553,15 @@
 
 
             totalDeductionVal = costVal + totalImprovementVal + +expenseOnSale.value
-            let captitalGainVal = +sellingPrice.value - totalDeductionVal
+            let captitalGainVal = +sellingPrice.value - +totalDeductionVal
 
 
-            costOfAcquisitionIndexation.value = costVal
+            costOfAcquisitionIndexation.value = costVal.toFixed(2)
 
 
-            totalDeduction.value = totalDeductionVal
+            totalDeduction.value = totalDeductionVal.toFixed(2)
 
-            document.getElementById("capitalGainsResult").innerHTML = `Capital Gains: ${captitalGainVal}`
+            document.getElementById("capitalGainsResult").innerHTML = `Capital Gains: ${+captitalGainVal.toFixed(2)}`
 
             
 
