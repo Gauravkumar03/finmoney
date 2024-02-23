@@ -379,6 +379,7 @@
         <button id="dividendIncomeBtn">Calculate Dividend Income</button>
         <br>
         <p id="dividendIncomeResult"></p>
+        <button id="check">Check</button>
     </div>
 
     <script type="module">
@@ -490,7 +491,22 @@
         function fun1() {
             const costOfImprovements1 = parseFloat(document.getElementById("costOfImprovements1").value);
             const dateOfImprovement1 = document.getElementById("dateOfImprovement1").value;
-            let improvementVal1 = costOfImprovements1 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement1]
+            let saleYearVal
+            let improvementYearVal
+
+            if(saleYear.value in indexationTable) {
+                saleYearVal = indexationTable[saleYear.value]
+            } else {
+                saleYearVal = 101
+            }   
+
+            if(dateOfImprovement1.value in indexationTable) {
+                improvementYearVal = indexationTable[dateOfImprovement1.value]
+            } else {
+                improvementYearVal = 101
+            } 
+
+            let improvementVal1 = costOfImprovements1 * saleYearVal / improvementYearVal
             improvementCostOfIndexation1.value = +improvementVal1.toFixed(0)
             totalImprovementVal += +improvementVal1.toFixed(0)
             
@@ -502,7 +518,23 @@
         function fun2() {
             const costOfImprovements2 = parseFloat(document.getElementById("costOfImprovements2").value);
             const dateOfImprovement2 = document.getElementById("dateOfImprovement2").value;
-            let improvementVal2 = costOfImprovements2 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement2]
+
+            let saleYearVal
+            let improvementYearVal
+
+            if(saleYear.value in indexationTable) {
+                saleYearVal = indexationTable[saleYear.value]
+            } else {
+                saleYearVal = 101
+            }   
+
+            if(dateOfImprovement1.value in indexationTable) {
+                improvementYearVal = indexationTable[dateOfImprovement1.value]
+            } else {
+                improvementYearVal = 101
+            } 
+
+            let improvementVal2 = costOfImprovements2 * saleYearVal / improvementYearVal
             improvementCostOfIndexation2.value = +improvementVal2.toFixed(0)
             totalImprovementVal += +improvementVal2.toFixed(0)
             
@@ -514,7 +546,23 @@
         function fun3() {
             const costOfImprovements3 = parseFloat(document.getElementById("costOfImprovements2").value);
             const dateOfImprovement3 = document.getElementById("dateOfImprovement2").value;
-            let improvementVal3 = costOfImprovements3 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement3]
+
+            let saleYearVal
+            let improvementYearVal
+
+            if(saleYear.value in indexationTable) {
+                saleYearVal = indexationTable[saleYear.value]
+            } else {
+                saleYearVal = 101
+            }   
+
+            if(dateOfImprovement1.value in indexationTable) {
+                improvementYearVal = indexationTable[dateOfImprovement1.value]
+            } else {
+                improvementYearVal = 101
+            } 
+
+            let improvementVal3 = costOfImprovements3 * saleYearVal / improvementYearVal
             improvementCostOfIndexation3.value = +improvementVal3.toFixed(0)
             totalImprovementVal += +improvementVal3.toFixed(0)
             
@@ -532,24 +580,21 @@
 
             const holdingPeriod = saleYear - purchaseYear;
 
-            // if (holdingPeriod >= 24) {
-            //     const indexationTable = {
-            //         2001: 100, 2002: 105, 2003: 109, 2004: 113, 2005: 117, 2006: 122, 2007: 129, 2008: 137,
-            //         2009: 148, 2010: 167, 2011: 184, 2012: 200, 2013: 220, 2014: 240, 2015: 254, 2016: 264,
-            //         2017: 272, 2018: 280, 2019: 289, 2020: 301, 2021: 317, 2022: 331
-            //     };
+            let saleYearVal
+            let purchaseYearVal
+            if(saleYear.value in indexationTable) {
+                saleYearVal = indexationTable[saleYear.value]
+            } else {
+                saleYearVal = 101
+            }    
+            
+            if(purchaseYear.value in indexationTable) {
+                purchaseYearVal = indexationTable[saleYear.value]
+            } else {
+                purchaseYearVal = 101
+            }  
 
-            //     const indexedCost = costOfAcquisition * (indexationTable[saleYear] / indexationTable[purchaseYear]) + costOfImprovements;
-            //     const longTermCapitalGains = sellingPrice - indexedCost;
-
-            //     document.getElementById("capitalGainsResult").innerHTML = `Indexed cost: ${indexedCost.toFixed(2)}<br>Long-term capital gains: ${longTermCapitalGains.toFixed(2)}`;
-            // } else {
-            //     const shortTermCapitalGains = sellingPrice - (costOfAcquisition + costOfImprovements);
-            //     document.getElementById("capitalGainsResult").innerHTML = `Short-term capital gains: ${shortTermCapitalGains.toFixed(2)}`;
-            // }
-
-
-            let costVal = +costOfAcquisition.value * indexationTable[saleYear.value] / indexationTable[purchaseYear.value]
+            let costVal = +costOfAcquisition.value * saleYearVal / purchaseYearVal
 
 
             totalDeductionVal = costVal + totalImprovementVal + +expenseOnSale.value
@@ -561,7 +606,7 @@
 
             totalDeduction.value = totalDeductionVal.toFixed(0)
 
-            document.getElementById("capitalGainsResult").innerHTML = `Capital Gains: ${+captitalGainVal.toFixed(0)}`
+            document.getElementById("capitalGainsResult").innerHTML = `Capital Gains: ${+captitalGainVal.toFixed()}`
 
             
 
@@ -592,6 +637,7 @@
                 });
             })
         });
+
 
 
 
