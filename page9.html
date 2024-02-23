@@ -282,7 +282,7 @@
             <label for="improvementCostOfIndexation">Improvement Cost of Indexation:</label>
             <input type="number" id="improvementCostOfIndexation" placeholder="Enter improvement cost">
         </div> -->
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -491,11 +491,11 @@
             const costOfImprovements1 = parseFloat(document.getElementById("costOfImprovements1").value);
             const dateOfImprovement1 = document.getElementById("dateOfImprovement1").value;
             let improvementVal1 = costOfImprovements1 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement1]
-            improvementCostOfIndexation1.value = +improvementVal1.toFixed(2)
-            totalImprovementVal += +improvementVal1.toFixed(2)
+            improvementCostOfIndexation1.value = +improvementVal1.toFixed(0)
+            totalImprovementVal += +improvementVal1.toFixed(0)
             
             for (let item of totalImprovement) {
-                item.value = +totalImprovementVal.toFixed(2)
+                item.value = +totalImprovementVal.toFixed(0)
             }
         }
 
@@ -503,11 +503,11 @@
             const costOfImprovements2 = parseFloat(document.getElementById("costOfImprovements2").value);
             const dateOfImprovement2 = document.getElementById("dateOfImprovement2").value;
             let improvementVal2 = costOfImprovements2 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement2]
-            improvementCostOfIndexation2.value = +improvementVal2.toFixed(2)
-            totalImprovementVal += +improvementVal2.toFixed(2)
+            improvementCostOfIndexation2.value = +improvementVal2.toFixed(0)
+            totalImprovementVal += +improvementVal2.toFixed(0)
             
             for (let item of totalImprovement) {
-                item.value = +totalImprovementVal.toFixed(2)
+                item.value = +totalImprovementVal.toFixed(0)
             }
         }
 
@@ -515,11 +515,11 @@
             const costOfImprovements3 = parseFloat(document.getElementById("costOfImprovements2").value);
             const dateOfImprovement3 = document.getElementById("dateOfImprovement2").value;
             let improvementVal3 = costOfImprovements3 * indexationTable[saleYear.value] / indexationTable[dateOfImprovement3]
-            improvementCostOfIndexation3.value = +improvementVal3.toFixed(2)
-            totalImprovementVal += +improvementVal3.toFixed(2)
+            improvementCostOfIndexation3.value = +improvementVal3.toFixed(0)
+            totalImprovementVal += +improvementVal3.toFixed(0)
             
             for (let item of totalImprovement) {
-                item.value = +totalImprovementVal.toFixed(2)
+                item.value = +totalImprovementVal.toFixed(0)
             }
         }
 
@@ -556,12 +556,12 @@
             let captitalGainVal = +sellingPrice.value - +totalDeductionVal
 
 
-            costOfAcquisitionIndexation.value = costVal.toFixed(2)
+            costOfAcquisitionIndexation.value = costVal.toFixed(0)
 
 
-            totalDeduction.value = totalDeductionVal.toFixed(2)
+            totalDeduction.value = totalDeductionVal.toFixed(0)
 
-            document.getElementById("capitalGainsResult").innerHTML = `Capital Gains: ${+captitalGainVal.toFixed(2)}`
+            document.getElementById("capitalGainsResult").innerHTML = `Capital Gains: ${+captitalGainVal.toFixed(0)}`
 
             
 
