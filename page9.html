@@ -266,7 +266,7 @@
         <input type="month" id="purchaseYear" class="yearpicker" placeholder="Enter purchase year">
         <br>
         <label for="saleYear">Enter the sale year of the asset (in format YYYY):</label>
-        <input type="month" id="saleYear" class="yearpicker" placeholder="Enter sale year">
+        <input type="month" id="saleYear" class="yearpicker" placeholder="Enter sale year" required>
         <br>
         <label for="expenseOnSale">Expense on Sale:</label>
         <input type="number" id="expenseOnSale" placeholder="Enter expense on Sale">
@@ -490,7 +490,7 @@
 
         function fun1() {
             const costOfImprovements1 = parseFloat(document.getElementById("costOfImprovements1").value);
-            const dateOfImprovement1 = document.getElementById("dateOfImprovement1").value;
+            const dateOfImprovement1 = document.getElementById("dateOfImprovement1");
             let saleYearVal
             let improvementYearVal
 
@@ -499,6 +499,7 @@
             } else {
                 saleYearVal = 101
             }   
+            
 
             if(dateOfImprovement1.value in indexationTable) {
                 improvementYearVal = indexationTable[dateOfImprovement1.value]
@@ -507,8 +508,17 @@
             } 
 
             let improvementVal1 = costOfImprovements1 * saleYearVal / improvementYearVal
-            improvementCostOfIndexation1.value = +improvementVal1.toFixed(0)
-            totalImprovementVal += +improvementVal1.toFixed(0)
+        
+
+            if(improvementCostOfIndexation1.value === '') {
+                improvementCostOfIndexation1.value = +improvementVal1.toFixed(0)
+                totalImprovementVal += +improvementVal1.toFixed(0)
+                
+            } else {
+                totalImprovementVal -= +improvementCostOfIndexation1.value 
+                improvementCostOfIndexation1.value = +improvementVal1.toFixed(0)
+                totalImprovementVal += +improvementVal1.toFixed(0)
+            }
             
             for (let item of totalImprovement) {
                 item.value = +totalImprovementVal.toFixed(0)
@@ -517,7 +527,7 @@
 
         function fun2() {
             const costOfImprovements2 = parseFloat(document.getElementById("costOfImprovements2").value);
-            const dateOfImprovement2 = document.getElementById("dateOfImprovement2").value;
+            const dateOfImprovement2 = document.getElementById("dateOfImprovement2");
 
             let saleYearVal
             let improvementYearVal
@@ -528,15 +538,23 @@
                 saleYearVal = 101
             }   
 
-            if(dateOfImprovement1.value in indexationTable) {
-                improvementYearVal = indexationTable[dateOfImprovement1.value]
+            if(dateOfImprovement2.value in indexationTable) {
+                improvementYearVal = indexationTable[dateOfImprovement2.value]
             } else {
                 improvementYearVal = 101
             } 
 
             let improvementVal2 = costOfImprovements2 * saleYearVal / improvementYearVal
-            improvementCostOfIndexation2.value = +improvementVal2.toFixed(0)
-            totalImprovementVal += +improvementVal2.toFixed(0)
+            
+            if(improvementCostOfIndexation2.value === '') {
+                improvementCostOfIndexation2.value = +improvementVal2.toFixed(0)
+                totalImprovementVal += +improvementVal2.toFixed(0)
+                
+            } else {
+                totalImprovementVal -= +improvementCostOfIndexation2.value 
+                improvementCostOfIndexation2.value = +improvementVal2.toFixed(0)
+                totalImprovementVal += +improvementVal2.toFixed(0)
+            }
             
             for (let item of totalImprovement) {
                 item.value = +totalImprovementVal.toFixed(0)
@@ -556,19 +574,28 @@
                 saleYearVal = 101
             }   
 
-            if(dateOfImprovement1.value in indexationTable) {
+            if(dateOfImprovement3.value in indexationTable) {
                 improvementYearVal = indexationTable[dateOfImprovement3.value]
             } else {
                 improvementYearVal = 101
             } 
 
             let improvementVal3 = costOfImprovements3 * saleYearVal / improvementYearVal
-            improvementCostOfIndexation3.value = +improvementVal3.toFixed(0)
-            totalImprovementVal += +improvementVal3.toFixed(0)
+            
+            if(improvementCostOfIndexation3.value === '') {
+                improvementCostOfIndexation3.value = +improvementVal3.toFixed(0)
+                totalImprovementVal += +improvementVal3.toFixed(0)
+                
+            } else {
+                totalImprovementVal -= +improvementCostOfIndexation3.value 
+                improvementCostOfIndexation3.value = +improvementVal3.toFixed(0)
+                totalImprovementVal += +improvementVal3.toFixed(0)
+            }
             
             for (let item of totalImprovement) {
                 item.value = +totalImprovementVal.toFixed(0)
             }
+            
         }
 
         gainsBtn.addEventListener('click', calculateCapitalGains)
