@@ -249,7 +249,7 @@
         <div class="flex-child" id="longTerm"></div>
         <div class="flex-child" id="shortTerm"></div>
     </div>
-    <div class="container">
+    <form class="container">
         <h1>Capital Gains and Income Calculator</h1>
 
         <!-- Capital Gains Section -->
@@ -266,7 +266,7 @@
         <input type="month" id="purchaseYear" class="yearpicker" placeholder="Enter purchase year">
         <br>
         <label for="saleYear">Enter the sale year of the asset (in format YYYY):</label>
-        <input type="month" id="saleYear" class="yearpicker" placeholder="Enter sale year" required>
+        <input type="month" id="saleYear" class="yearpicker" placeholder="Enter sale year" required />
         <br>
         <label for="expenseOnSale">Expense on Sale:</label>
         <input type="number" id="expenseOnSale" placeholder="Enter expense on Sale">
@@ -380,7 +380,7 @@
         <br>
         <p id="dividendIncomeResult"></p>
         <button id="check">Check</button>
-    </div>
+    </form>
 
     <script type="module">
         const jsonData = localStorage.getItem('jsonData')
@@ -493,6 +493,11 @@
             const dateOfImprovement1 = document.getElementById("dateOfImprovement1");
             let saleYearVal
             let improvementYearVal
+
+            if(saleYear.value === '') {
+                alert('Enter Sale Year')
+                return
+            }
 
             if(saleYear.value in indexationTable) {
                 saleYearVal = indexationTable[saleYear.value]
