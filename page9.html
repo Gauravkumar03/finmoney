@@ -544,8 +544,8 @@
         }
 
         function fun3() {
-            const costOfImprovements3 = parseFloat(document.getElementById("costOfImprovements2").value);
-            const dateOfImprovement3 = document.getElementById("dateOfImprovement2").value;
+            const costOfImprovements3 = parseFloat(document.getElementById("costOfImprovements3").value);
+            const dateOfImprovement3 = document.getElementById("dateOfImprovement3").value;
 
             let saleYearVal
             let improvementYearVal
@@ -557,7 +557,7 @@
             }   
 
             if(dateOfImprovement1.value in indexationTable) {
-                improvementYearVal = indexationTable[dateOfImprovement1.value]
+                improvementYearVal = indexationTable[dateOfImprovement3.value]
             } else {
                 improvementYearVal = 101
             } 
@@ -589,7 +589,7 @@
             }    
             
             if(purchaseYear.value in indexationTable) {
-                purchaseYearVal = indexationTable[saleYear.value]
+                purchaseYearVal = indexationTable[purchaseYear.value]
             } else {
                 purchaseYearVal = 101
             }  
