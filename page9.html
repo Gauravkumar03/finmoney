@@ -249,7 +249,7 @@
         <div class="flex-child" id="longTerm"></div>
         <div class="flex-child" id="shortTerm"></div>
     </div>
-    <form class="container">
+    <div class="container">
         <h1>Capital Gains and Income Calculator</h1>
 
         <!-- Capital Gains Section -->
@@ -380,7 +380,7 @@
         <br>
         <p id="dividendIncomeResult"></p>
         <button id="check">Check</button>
-    </form>
+    </div>
 
     <script type="module">
         const jsonData = localStorage.getItem('jsonData')
@@ -459,7 +459,7 @@
             // 2001: 100, 2002: 105, 2003: 109, 2004: 113, 2005: 117, 2006: 122, 2007: 129, 2008: 137,
             // 2009: 148, 2010: 167, 2011: 184, 2012: 200, 2013: 220, 2014: 240, 2015: 254, 2016: 264,
             // 2017: 272, 2018: 280, 2019: 289, 2020: 301, 2021: 317, 2022: 331, '2024-07': 201
-            '2001-04': 101, '2001-05': 101, '2001-06': 101, '2001-07': 101, '2001-08': 101, '2001-09': 101, '2001-10': 101, '2001-11': 101, '2001-12': 101, '2002-01': 101, '2002-02': 101, '2002-03': 101,
+            '2001-04': 100, '2001-05': 100, '2001-06': 100, '2001-07': 100, '2001-08': 100, '2001-09': 100, '2001-10': 100, '2001-11': 100, '2001-12': 100, '2002-01': 100, '2002-02': 100, '2002-03': 100,
             '2002-04': 105, '2002-05': 105, '2002-06': 105, '2002-07': 105, '2002-08': 105, '2002-09': 105, '2002-10': 105, '2002-11': 105, '2002-12': 105, '2003-01': 105, '2003-02': 105, '2003-03': 105,
             '2003-04': 109, '2003-05': 109, '2003-06': 109, '2003-07': 109, '2003-08': 109, '2003-09': 109, '2003-10': 109, '2003-11': 109, '2003-12': 109, '2004-01': 109, '2004-02': 109, '2004-03': 109,
             '2004-04': 113, '2004-05': 113, '2004-06': 113, '2004-07': 113, '2004-08': 113, '2004-09': 113, '2004-10': 113, '2004-11': 113, '2004-12': 113, '2005-01': 113, '2005-02': 113, '2005-03': 113,
@@ -502,14 +502,14 @@
             if(saleYear.value in indexationTable) {
                 saleYearVal = indexationTable[saleYear.value]
             } else {
-                saleYearVal = 101
+                saleYearVal = 100
             }   
             
 
             if(dateOfImprovement1.value in indexationTable) {
                 improvementYearVal = indexationTable[dateOfImprovement1.value]
             } else {
-                improvementYearVal = 101
+                improvementYearVal = 100
             } 
 
             let improvementVal1 = costOfImprovements1 * saleYearVal / improvementYearVal
@@ -540,13 +540,13 @@
             if(saleYear.value in indexationTable) {
                 saleYearVal = indexationTable[saleYear.value]
             } else {
-                saleYearVal = 101
+                saleYearVal = 100
             }   
 
             if(dateOfImprovement2.value in indexationTable) {
                 improvementYearVal = indexationTable[dateOfImprovement2.value]
             } else {
-                improvementYearVal = 101
+                improvementYearVal = 100
             } 
 
             let improvementVal2 = costOfImprovements2 * saleYearVal / improvementYearVal
@@ -576,13 +576,13 @@
             if(saleYear.value in indexationTable) {
                 saleYearVal = indexationTable[saleYear.value]
             } else {
-                saleYearVal = 101
+                saleYearVal = 100
             }   
 
             if(dateOfImprovement3.value in indexationTable) {
                 improvementYearVal = indexationTable[dateOfImprovement3.value]
             } else {
-                improvementYearVal = 101
+                improvementYearVal = 100
             } 
 
             let improvementVal3 = costOfImprovements3 * saleYearVal / improvementYearVal
@@ -617,13 +617,13 @@
             if(saleYear.value in indexationTable) {
                 saleYearVal = indexationTable[saleYear.value]
             } else {
-                saleYearVal = 101
+                saleYearVal = 100
             }    
             
             if(purchaseYear.value in indexationTable) {
                 purchaseYearVal = indexationTable[purchaseYear.value]
             } else {
-                purchaseYearVal = 101
+                purchaseYearVal = 100
             }  
 
             let costVal = +costOfAcquisition.value * saleYearVal / purchaseYearVal
