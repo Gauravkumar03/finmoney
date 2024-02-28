@@ -358,6 +358,9 @@
         <button id="capitalGainsBtn">Calculate Capital Gains</button>
         <br>
         <p id="capitalGainsResult"></p>
+        
+        <br>
+        <p id="taxDeductionResult"></p>
 
         <!-- Income Section -->
         <label for="fixedDeposit">Enter the amount in fixed deposit:</label>
@@ -489,6 +492,9 @@
         doi3.addEventListener('change', fun3)
 
         function fun1() {
+            if(document.getElementById("costOfImprovements1").value == '' || document.getElementById("dateOfImprovement1") == '')  {
+                return
+            }
             const costOfImprovements1 = parseFloat(document.getElementById("costOfImprovements1").value);
             const dateOfImprovement1 = document.getElementById("dateOfImprovement1");
             let saleYearVal
@@ -531,6 +537,10 @@
         }
 
         function fun2() {
+
+            if(document.getElementById("costOfImprovements2").value == '' || document.getElementById("dateOfImprovement2") == '')  {
+                return
+            }
             const costOfImprovements2 = parseFloat(document.getElementById("costOfImprovements2").value);
             const dateOfImprovement2 = document.getElementById("dateOfImprovement2");
 
@@ -567,6 +577,9 @@
         }
 
         function fun3() {
+            if(document.getElementById("costOfImprovements3").value == '' || document.getElementById("dateOfImprovement3") == '')  {
+                return
+            }
             const costOfImprovements3 = parseFloat(document.getElementById("costOfImprovements3").value);
             const dateOfImprovement3 = document.getElementById("dateOfImprovement3");
 
@@ -607,6 +620,9 @@
         interestsBtn.addEventListener('click', calculateInterestIncome)
         dividendBtn.addEventListener('click', calculateDividendIncome)
         function calculateCapitalGains() {
+            fun1()
+            fun2()
+            fun3()
 
             let totalDeductionVal
 
@@ -631,6 +647,7 @@
 
             totalDeductionVal = costVal + totalImprovementVal + +expenseOnSale.value
             let captitalGainVal = +sellingPrice.value - +totalDeductionVal
+            let taxDeductionVal = captitalGainVal / 5
 
 
             costOfAcquisitionIndexation.value = costVal.toFixed(0)
@@ -640,7 +657,7 @@
 
             document.getElementById("capitalGainsResult").innerHTML = `Capital Gains: ${+captitalGainVal.toFixed()}`
 
-            
+            document.getElementById("taxDeductionResult").innerHTML = `Tax Deduction: ${+taxDeductionVal.toFixed()}`
 
         }
 
