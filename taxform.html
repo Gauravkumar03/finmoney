@@ -494,9 +494,9 @@
     <tr>
       <td rowspan="7" class="dg">Total Income</td>
       <td>a) Salary Income</td>
-      <td>0</td>
+      <td id="salary_new">0</td>
       <td id="salary">0</td>
-      <td>0</td>
+      <td id="salary_utilized">0</td>
     </tr>
 
     <tr>
@@ -519,9 +519,9 @@
     </tr>
     <tr>
       <td>e) Income from Other Source</td>
-      <td>0</td>
+      <td id="di_new">0</td>
       <td id="di">0</td>
-      <td>0</td>
+      <td id="di_utilized">0</td>
     </tr>
     <tr>
       <td>f) Exempt Income</td>
@@ -540,19 +540,19 @@
       <td>a) Exemptions</td>
       <td>0</td>
       <td id="exemptions">0</td>
-      <td>0</td>
+      <td id="exemptions_utilized">0</td>
     </tr>
     <tr>
       <td>b) Standard Deductions</td>
-      <td>0</td>
+      <td id="sd_new">0</td>
       <td id="sd">0</td>
-      <td>0</td>
+      <td id="sd_utilized">0</td>
     </tr>
     <tr>
       <td>c) Chapter IV</td>
       <td>0</td>
       <td id="80c">0</td>
-      <td>0</td>
+      <td id="80c_utilized">0</td>
     </tr>
     <tr class="dg">
       <td>Total</td>
@@ -570,16 +570,16 @@
     </tr>
     <tr class="dg">
       <td>Total</td>
-      <td>0</td>
+      <td id="total_taxable_income_new">0</td>
       <td id="total_taxable_income">0</td>
-      <td>0</td>
+      <td id="total_taxable_income_utilized">0</td>
     </tr>
     <tr>
       <td rowspan="6" class="dg">Tax due on Above</td>
       <td>a) Tax @ Normal Rate</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td id="tax_due_new">0</td>
+      <td id="tax_due">0</td>
+      <td id="tax_due_utilized">0</td>
     </tr>
     <tr>
       <td>b) Tax @ Special Rate</td>
@@ -609,7 +609,7 @@
       <td>Total</td>
       <td>0</td>
       <td id="total_tax_old">0</td>
-      <td>0</td>
+      <td id="total_tax_utilized">0</td>
     </tr>
   </table>
 
@@ -707,17 +707,32 @@
       var SD = parseFloat(document.getElementById("SD").value) || 0;
       var _80C = parseFloat(document.getElementById("80C").value) || 0;
       var salary = document.getElementById('salary')
+      var salary_new = document.getElementById('salary_new')
+      var salary_utilized = document.getElementById('salary_utilized')
       var hp = document.getElementById('hp')
       var cg = document.getElementById('cg')
       var business = document.getElementById('business')
       var ei = document.getElementById('ei')
       var di = document.getElementById('di')
+      var di_new = document.getElementById('di_new')
+      var di_utilized = document.getElementById('di_utilized')
       var total_income_old = document.getElementById('total_income_old')
       var exemptions = document.getElementById('exemptions')
+      var exemptions_utilized = document.getElementById('exemptions_utilized')
       var sd = document.getElementById('sd')
+      var sd_new = document.getElementById('sd_new')
+      var sd_utilized = document.getElementById('sd_utilized')
       var _80c = document.getElementById('80c')
+      var _80c_utilized = document.getElementById('80c_utilized')
       var total_exemptions_old = document.getElementById('total_exemptions_old')
       var total_taxable_income = document.getElementById('total_taxable_income')
+      var total_taxable_income_new = document.getElementById('total_taxable_income_new')
+      var total_taxable_income_utilized = document.getElementById('total_taxable_income_utilized')
+      var tax_due = document.getElementById('tax_due')
+      var tax_due_new = document.getElementById('tax_due_new')
+      var tax_due_utilized = document.getElementById('tax_due_utilized')
+      var total_tax_old = document.getElementById('total_tax_old')
+      var total_tax_utilized = document.getElementById('total_tax_utilized')
 
 
       var regime = document.getElementById("regime").value; // Assuming "regime" is an input field
@@ -837,15 +852,33 @@
 
       if (regime === 'old') {
         salary.innerText = SGP
+        salary_utilized.innerText = SGP
         di.innerText = DI
+        di_utilized.innerText = DI
         total_income_old.innerText = +salary.innerText + +hp.innerText + +cg.innerText + +business.innerText + +di.innerText + +ei.innerText
 
 
         sd.innerText = SD + PT
+        sd_utilized.innerText = SD + PT
         exemptions.innerText = GR + LE + INTERNET + OtherA + HRA
+        exemptions_utilized.innerText = GR + LE + INTERNET + OtherA + HRA
         _80c.innerText = _80C
+        _80c_utilized.innerText = _80C + E80G
         total_exemptions_old.innerText = +sd.innerText + +exemptions.innerText + +_80c.innerText
         total_taxable_income.innerText = +total_income_old.innerText - +total_exemptions_old.innerText
+        total_taxable_income_utilized.innerText = TIAC
+        tax_due.innerText = document.getElementById('TL').value
+
+        total_tax_old.innerText = TL
+        total_tax_utilized.innerText = TLAC
+      }
+
+      if (regime === 'new') {
+        salary_new.innerText = SGP
+        di_new.innerText = DI
+        sd_new.innerText = SD
+        total_taxable_income_new.innerText = TAX
+        tax_due_new.innerText = document.getElementById('TL').value
       }
 
 
