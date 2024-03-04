@@ -337,6 +337,7 @@
         <select id="regime" onchange="toggleOptions(); calculateValues()" class="p-2 border rounded">
           <option value="new">New</option>
           <option value="old">Old</option>
+          <option value="old_utilized">Old Utilized</option>
         </select>
       </div>
 
@@ -680,6 +681,12 @@
         document.getElementById("SD").readOnly = true; // Set SD to readonly for old regime
         document.getElementById("80C").readOnly = false; // Set 80C to editable for old regime
         document.getElementById("SD").value = "50000"; // Set the value for the old regime
+      } else if (regime === 'old_utilized') {
+        oldOptions.style.display = "block";
+        formContainer.classList.add("old-regime");
+        document.getElementById("SD").readOnly = true; // Set SD to readonly for old regime
+        document.getElementById("80C").readOnly = false; // Set 80C to editable for old regime
+        document.getElementById("SD").value = "50000"; // Set the value for the old regime
       } else {
         oldOptions.style.display = "none";
         formContainer.classList.remove("old-regime");
@@ -756,7 +763,7 @@
 
       var TAX;
 
-      if (regime === "old") {
+      if (regime === "old" || regime === "old_utilized") {
         TAX = (SGP + DI + incomeVal) - SD - GR - LE - INTERNET - OtherA - HRA - PT - _80C;
       } else if (regime === "new") {
         TAX = (SGP + DI + incomeVal) - SD - _80C;
@@ -824,7 +831,7 @@
       var SD = parseFloat(document.getElementById("SD").value) || 0;
       var _80C = parseFloat(document.getElementById("80C").value) || 0;
 
-      if (regime === "old") {
+      if (regime === "old" || regime === "old_utilized") {
         TIAC = TAX - (E80G);
         document.getElementById("TIAC").value = TIAC;
       } else if (regime === "new") {
@@ -869,30 +876,43 @@
 
       if (regime === 'old') {
         salary.innerText = SGP
-        salary_utilized.innerText = SGP
+        // salary_utilized.innerText = SGP
         di.innerText = DI
-        di_utilized.innerText = DI
+        // di_utilized.innerText = DI
         total_income_old.innerText = +salary.innerText + +hp.innerText + +cg.innerText + +business.innerText + +di.innerText + +ei.innerText
-        total_income_utilized.innerText = +salary_utilized.innerText + +hp_utilized.innerText + +cg_utilized.innerText + +business_utilized.innerText + +di_utilized.innerText + +ei_utilized.innerText
+        // total_income_utilized.innerText = +salary_utilized.innerText + +hp_utilized.innerText + +cg_utilized.innerText + +business_utilized.innerText + +di_utilized.innerText + +ei_utilized.innerText
 
 
 
 
         sd.innerText = SD + PT
-        sd_utilized.innerText = SD + PT
+        // sd_utilized.innerText = SD + PT
         exemptions.innerText = GR + LE + INTERNET + OtherA + HRA
-        exemptions_utilized.innerText = GR + LE + INTERNET + OtherA + HRA
+        // exemptions_utilized.innerText = GR + LE + INTERNET + OtherA + HRA
         _80c.innerText = _80C
-        _80c_utilized.innerText = _80C + E80G
+        // _80c_utilized.innerText = _80C + E80G
         total_exemptions_old.innerText = +sd.innerText + +exemptions.innerText + +_80c.innerText
-        total_exemptions_utilized.innerText = +sd_utilized.innerText + +exemptions_utilized.innerText + +_80c_utilized.innerText
+        // total_exemptions_utilized.innerText = +sd_utilized.innerText + +exemptions_utilized.innerText + +_80c_utilized.innerText
         total_taxable_income.innerText = +total_income_old.innerText - +total_exemptions_old.innerText
-        total_taxable_income_utilized.innerText = TIAC
+        // total_taxable_income_utilized.innerText = TIAC
         tax_due.innerText = document.getElementById('TL').value
-        tax_due_utilized.innerText = document.getElementById('TL').value
+        // tax_due_utilized.innerText = document.getElementById('TL').value
   
 
         total_tax_old.innerText = TL
+        // total_tax_utilized.innerText = TLAC
+      }
+
+      if (regime === 'old_utilized') {
+        salary_utilized.innerText = SGP
+        di_utilized.innerText = DI
+        total_income_utilized.innerText = +salary_utilized.innerText + +hp_utilized.innerText + +cg_utilized.innerText + +business_utilized.innerText + +di_utilized.innerText + +ei_utilized.innerText
+        sd_utilized.innerText = SD + PT
+        exemptions_utilized.innerText = GR + LE + INTERNET + OtherA + HRA
+        _80c_utilized.innerText = _80C + E80G
+        total_exemptions_utilized.innerText = +sd_utilized.innerText + +exemptions_utilized.innerText + +_80c_utilized.innerText
+        total_taxable_income_utilized.innerText = TIAC
+        tax_due_utilized.innerText = document.getElementById('TL').value
         total_tax_utilized.innerText = TLAC
       }
 
@@ -900,8 +920,8 @@
         salary_new.innerText = SGP
         di_new.innerText = DI
         sd_new.innerText = SD
-        _80c.innerText = _80C
-        exemptions.innerText = GR + LE + INTERNET + OtherA + HRA
+        _80c_new.innerText = _80C
+        exemptions_new.innerText = GR + LE + INTERNET + OtherA + HRA
         total_exemptions_new.innerText = +sd_new.innerText + +exemptions_new.innerText + +_80c_new.innerText
         total_taxable_income_new.innerText = TAX
         tax_due_new.innerText = document.getElementById('TL').value
@@ -917,7 +937,7 @@
     function calculateTax(TAX, regime, oldCategory) {
       let taxAmount = 0;
 
-      if (regime === "old") {
+      if (regime === "old" || regime === "old_utilized") {
         switch (oldCategory) {
           case "normal":
             if (TAX <= 250000) {
@@ -994,7 +1014,7 @@
     function calculateTLAC(TIAC, regime, oldCategory) {
       let result = 0;
 
-      if (regime === "old") {
+      if (regime === "old" || regime === "old_utilized") {
         switch (oldCategory) {
           case "normal":
             if (TIAC <= 250000) {
@@ -1078,7 +1098,7 @@
       var regime = document.getElementById("regime").value;
       var TS = parseFloat(document.getElementById("TS").value) || 0;
 
-      if (regime === "old") {
+      if (regime === "old" || regime === "old_utilized") {
         var taxSaveDisplay = document.getElementById("old-regime-tax-save-display");
         taxSaveDisplay.innerHTML = TS.toFixed(2);
       } else {
