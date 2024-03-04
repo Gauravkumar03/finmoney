@@ -676,27 +676,56 @@
       var formContainer = document.querySelector(".form-container");
 
       if (regime === "old") {
+        document.getElementById('SD').value = ''
+        document.getElementById("80C").value = ''
+        document.getElementById("GR").value = ''
+        document.getElementById("LE").value = ''
+        document.getElementById("SD").value = ''
+        document.getElementById("INTERNET").value = ''
+        document.getElementById("OtherA").value = ''
+        document.getElementById("HRA").value = ''
+        document.getElementById("PT").value = ''
         oldOptions.style.display = "block";
         formContainer.classList.add("old-regime");
         document.getElementById("SD").readOnly = true; // Set SD to readonly for old regime
         document.getElementById("80C").readOnly = false; // Set 80C to editable for old regime
         document.getElementById("SD").value = "50000"; // Set the value for the old regime
       } else if (regime === 'old_utilized') {
+        document.getElementById('SD').value = ''
+        document.getElementById("80C").value = ''
+        document.getElementById("GR").value = ''
+        document.getElementById("LE").value = ''
+        document.getElementById("SD").value = ''
+        document.getElementById("INTERNET").value = ''
+        document.getElementById("OtherA").value = ''
+        document.getElementById("HRA").value = ''
+        document.getElementById("PT").value = ''
         oldOptions.style.display = "block";
         formContainer.classList.add("old-regime");
         document.getElementById("SD").readOnly = true; // Set SD to readonly for old regime
         document.getElementById("80C").readOnly = false; // Set 80C to editable for old regime
         document.getElementById("SD").value = "50000"; // Set the value for the old regime
       } else {
+        document.getElementById('SD').value = ''
+        document.getElementById("80C").value = ''
+        document.getElementById("GR").value = ''
+        document.getElementById("LE").value = ''
+        document.getElementById("SD").value = ''
+        document.getElementById("INTERNET").value = ''
+        document.getElementById("OtherA").value = ''
+        document.getElementById("HRA").value = ''
+        document.getElementById("PT").value = ''
         oldOptions.style.display = "none";
         formContainer.classList.remove("old-regime");
         document.getElementById("SD").readOnly = false; // Set SD to editable for new regime
         document.getElementById("80C").readOnly = false; // Set 80C to editable for new regime
         document.getElementById("SD").value = "50000"; // Set the value for the new regime
+        if (+document.getElementById("80C").value > 50000) {
+          document.getElementById("80C").value = "50000"
+        }
       }
     }
     function calculateValues() {
-
 
 
 
@@ -897,7 +926,7 @@
         // total_taxable_income_utilized.innerText = TIAC
         tax_due.innerText = document.getElementById('TL').value
         // tax_due_utilized.innerText = document.getElementById('TL').value
-  
+
 
         total_tax_old.innerText = TL
         // total_tax_utilized.innerText = TLAC
@@ -917,10 +946,22 @@
       }
 
       if (regime === 'new') {
+        // document.getElementById('SD').value = ''
+        // document.getElementById("80C").value = ''
+        // document.getElementById("GR").value = ''
+        // document.getElementById("LE").value = ''
+        // document.getElementById("SD").value = ''
+        // document.getElementById("INTERNET").value = ''
+        // document.getElementById("OtherA").value = ''
+        // document.getElementById("HRA").value = ''
+        // document.getElementById("PT").value = ''
+        if (+document.getElementById("80C").value > 50000) {
+          document.getElementById("80C").value = "50000"
+        }
         salary_new.innerText = SGP
         di_new.innerText = DI
         sd_new.innerText = SD
-        _80c_new.innerText = _80C
+        _80c_new.innerText = document.getElementById("80C").value
         exemptions_new.innerText = GR + LE + INTERNET + OtherA + HRA
         total_exemptions_new.innerText = +sd_new.innerText + +exemptions_new.innerText + +_80c_new.innerText
         total_taxable_income_new.innerText = TAX
