@@ -352,11 +352,11 @@
                 DSDA = (basicSalary + dearnessAllowance) * 0.4;
             }
 
-            const hra = Math.min(actualRentPaid, hraAllowance, DSDA);
+            const hra = Math.min(actualRentPaid - (0.1 * basicSalary), hraAllowance, DSDA);
 
             // Display the result
             const resultElement = document.getElementById("result");
-            resultElement.innerHTML = `HRA: $${hra.toFixed(2)}`;
+            resultElement.innerHTML = `HRA: ${hra.toFixed(2)}`;
         }
 
         $(document).ready(function () {
