@@ -345,14 +345,16 @@
                 return;
             }
 
+            let rentPaid = actualRentPaid - (0.1 * (basicSalary + dearnessAllowance))
+
             let DSDA;
             if (isMetro) {
-                DSDA = (basicSalary + dearnessAllowance) * 0.5;
+                DSDA = (basicSalary) * 0.5;
             } else {
-                DSDA = (basicSalary + dearnessAllowance) * 0.4;
+                DSDA = (basicSalary) * 0.4;
             }
 
-            const hra = Math.min(actualRentPaid - (0.1 * basicSalary), hraAllowance, DSDA);
+            const hra = Math.min(rentPaid, hraAllowance, DSDA);
 
             // Display the result
             const resultElement = document.getElementById("result");
